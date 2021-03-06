@@ -5,6 +5,18 @@
 3,设置git
 4,打开需要设置git同步的文件夹,开始同步
 
+git add .
+所有文件添加到暂存
+
+git commit -m "first git" -a
+暂存区的文件添加到本地仓库
+
+git remote add origin https://github.com/righter808/manual.git
+连接远程仓库
+
+git push -u origin main 
+git push  #如果没有其他分支,用git push即可
+把本地仓库main分支的文件推送到远程仓库main分支
 
 git checkout master
 切换分支,master分支,要变为main分支git checkout main
