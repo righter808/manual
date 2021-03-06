@@ -1,0 +1,14 @@
+1,安装
+2,使用
+Vue.js devtools
+===============================1,安装
+地址
+https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd/related?hl=zh-CN
+添加到chrome中即可
+
+===============================2,使用
+chrome浏览器
+右键 检查 
+有个vue标签,点击即可
+
+还可以拖动vue标签的顺序哦!

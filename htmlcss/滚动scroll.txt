@@ -1,0 +1,22 @@
+1,给内容指定高度,这里以ul 为例,也可以用别的哦~,比如div,table
+2,给content.class添加overflow: scroll属性
+
+
+===========================1,给内容指定高度,这里以ul 为例,也可以用别的哦~,比如div,table
+
+   <ul class="content">
+    <li>123</li>
+    <li>123</li>
+    <li>123</li>
+    <li>123</li>
+   </ul>
+#指定类content,设置高度
+---------------------
+  .content{
+ background-color: #008000;
+  height: 800px;
+  width: 420px;
+  margin: 0 auto;
+  overflow: scroll;
+}
+#添加overflow: scroll; 即可在固定800px内实现滚动

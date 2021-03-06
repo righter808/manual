@@ -1,0 +1,36 @@
+访问节点和组件
+1,获得组件所在的节点
+2,获得同一节点的其它组件
+3,获得其它节点及其组件
+4,查找子节点
+
+==========================================1,获得组件所在的节点
+start: function () {
+    var node = this.node;
+    node.x = 100;
+}
+
+
+==========================================2,获得同一节点的其它组件
+start: function () {
+    var label = this.getComponent(cc.Label);
+    var text = this.name + 'started';
+
+    // Change the text in Label Component
+    label.string = text;
+}
+
+==========================================3,获得其它节点及其组
+#1,声名一个节点属性
+   properties: {
+        // 声明 player 属性
+        player: {
+            default: null,
+            type: cc.Node
+        }
+		}
+#2,把节点从层级管理器中拖到脚本属性里
+#3,设置成功后,脚本里就可以访问到节点
+ cc.log("The player is " + this.player.name);
+ 
+==========================================4,查找子节点

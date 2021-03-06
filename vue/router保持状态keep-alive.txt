@@ -1,0 +1,23 @@
+首页包含3个组件,home,about,contact,home组件包含2个子组件,1个新闻,1个用户,默认展示的是新闻,如果用户点击了用户子组件,在进入about组件,又返回home组件.默认是会展示新闻子组件,因为重新创建了一个组件,现在的需求是点击home组件,继续展示刚才点击了的用户子组件.
+
+打开src/app.vue,找到router-view.用keep-alive包裹  {代码1},只有用keep-alive包裹,后面的2个函数才会生效
+打开src\components\home.vue,加入  {代码2}
+
+
+
+#代码1
+<keep-alive>
+  <router-view/>
+</keep-alive>
+
+#代码2
+activated(){
+  this.$router.push(this.path);
+},
+deactived(){
+},
+beforeRouteLeave(to,from,next){
+   console.log(this.$route.path);
+   this.path=this.$route.path;
+   next()
+}

@@ -1,0 +1,9 @@
+1，引入依赖
+2，做好配置
+3，创建好数据表并成功连接
+4，分好层结构，controller，service，dao，entity
+5，entity包下创建实体类用来封装实体类，标记table，entity，对应表字段
+6，创建service接口，定义crud方法
+7，创建mapper接口，定义crud方法,并用注解定义好sql语句
+8，编写sevice接口实现类，实现这些方法，注入mapper。
+9，创建controller类，注入serviceImpl，定义响应请求地址。

@@ -1,0 +1,40 @@
+@Service
+public class StuServiceimpl implements StuService {
+    @Autowired
+    private StuDao stuDao;
+
+    @Override
+    public Student findStuByID(int id) {
+        return stuDao.getOne(id);
+    }
+
+    @Override
+    public Student save(Student student) {
+        return stuDao.save(student);
+    }
+
+    @Override
+    public Student update(Student student) {
+        return stuDao.save(student);
+    }
+
+    @Override
+    public void delete(int id) {
+        stuDao.deleteById(id);
+    }
+
+    /*父类中没有login方法，所以要自定义sql。Studao中定义.*/
+    @Override
+    public Student login(String name, String password) {
+        return stuDao.login(name,password);
+    }
+
+    @Override
+    /*要注意Page分页全部选择org.springframework.data.domain下的*/
+    public Page<Student> findAll(int page, int pagesize) {
+        //设置id升序排列
+        Pageable pageable = PageRequest.of(page,pagesize,new Sort(Sort.Direction.ASC,"id"));
+        return stuDao.findAll(pageable);
+    }
+}
+

@@ -1,0 +1,19 @@
+说明：tr不能单独存在，th,td应当放在tr中，tr相当于表格的行
+         th相当于表格的列，td相当于单元格
+<table border="1">
+  <tr>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+  </tr>
+  <tr>
+    <td>a</td>
+    <td>b</td>
+    <td>c</td>
+  </tr>
+  <tr>
+    <td>e</td>
+    <td>f</td>
+   <td>g</td>
+  </tr>
+</table>

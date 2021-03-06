@@ -1,0 +1,18 @@
+.background{
+  background-color: #008000;
+  background-image:url(/i/eg_bg_04.gif);
+  height: 800px;
+  width: 420px;
+  margin: 0 auto;
+}
+
+.a1{
+display:inline-block;
+height: 80px;
+width: 200px;
+background: #fff;
+margin-left: 50px;
+margin-top: 10px;
+margin-right: 10px;
+float: left;
+}

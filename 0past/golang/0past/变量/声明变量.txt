@@ -1,0 +1,5 @@
+var a string = "Runoob"
+
+或者
+
+a := "Runoob"

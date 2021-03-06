@@ -1,0 +1,20 @@
+{{  data  }}
+
+
+——————模板——————
+<template id="Child">
+   <div>
+      {{counter}}
+   </div>
+</template>
+
+——————组件——————
+var Child = {
+  template: '#Child',
+  data(){
+    return{
+	  counter:'0'
+	}
+  }
+
+}

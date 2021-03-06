@@ -1,0 +1,9 @@
+import Swiper from './Swiper'
+import SwiperItem from './SwiperItem'
+
+export {
+  Swiper, SwiperItem
+}
+
+
+#把2个文件导入到一个文件,然后统一导出的格式

@@ -1,0 +1,14 @@
+@click   
+:
+
+<ul v-for="item in music" ><ul>
+
+样式绑定
+<div v-bind:class="{ 'active': isActive }"></div>  或者
+<div :class="{ 'active': isActive }"></div>
+
+事件绑定
+<div id="app">
+  <button v-on:click="say('hi')">Say hi</button>
+  <button @click="say('what')">Say what</button>
+</div>

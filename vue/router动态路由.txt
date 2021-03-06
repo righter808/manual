@@ -1,0 +1,18 @@
+路由里添加对应的path
+  {
+    path: '/user/userID',
+    name: 'user',
+    component: user
+  },
+
+router-link修改,user/zhangsan  ，这里只是做示例思路
+<router-link v-bind:to="/user/userID">User</router-link> |
+
+真实开发里，zhangsan是动态获取的数据
+<script>
+  data(){
+  return {
+       userID:'lisi'
+             }
+}
+</script>

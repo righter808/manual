@@ -1,0 +1,23 @@
+引用https://www.runoob.com/try/try.php?filename=trycss3_flex
+#main
+{
+	width:220px;
+	height:300px;
+	border:1px solid black;
+	display:flex;
+}
+
+#main div
+{
+	flex:1;
+}
+
+
+<div id="main">
+  <div style="background-color:coral;">红色</div>
+  <div style="background-color:lightblue;">蓝色</div>  
+  <div style="background-color:lightgreen;">带有更多内容的绿色 div</div>
+</div>
+
+
+

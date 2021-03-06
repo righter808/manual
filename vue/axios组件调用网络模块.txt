@@ -1,0 +1,60 @@
+#前提,已经封装好网络模块
+1,组件导入网络模块
+2,请求数据
+3,保存数据
+
+===========2,组件导入网络模块
+
+import {getHomeMultidata} from "network/home";
+
+#{  getHomeMultidata }为什么加大括号,因为home.js没有设置default导出
+#network/home,是在request.js上面加的一层专门管理请求的home.js
+#参考 home.js,代码参考axios对request的再次封装home,js
+
+
+==========2,请求数据
+  export default {
+    name: "Home",
+    components: {
+      NavBar,
+      HomeSwiper,
+      RecommendView
+    },
+    data() {
+      return {
+        banners: [],
+        recommends: []
+      }
+    },
+    created() {
+      // 1.请求多个数据
+      getHomeMultidata().then(res => {
+        // this.result = res;
+        this.banners = res.data.banner.list;
+        this.recommends = res.data.recommend.list;
+      })
+    }
+  }
+
+#created()是请求数据的
+#getHomeMultidata()是home.js封装的方法,返回的是一个url
+
+
+==============3,保存数据
+  data() {
+      return {
+        banners: [],
+        recommends: []
+      }
+    },
+
+#因为调用后是函数栈的保存,函数调用结束数据就弹出了函数栈,所以需要保存起来,保存到组件的data()里
+# 函数调用 -> 压入函数栈(保存函数调用过程中所有变量)
+# 函数调用结束 -> 弹出函数栈(释放函数所有的变量)
+#banners和recommends保存的是this.banners
+        this.banners = res.data.banner.list;
+        this.recommends = res.data.recommend.list;
+
+
+
+

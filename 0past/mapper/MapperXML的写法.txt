@@ -1,0 +1,3 @@
+<select id="method" parameterType="string" resultType="int">
+  select count(*) from user where name like '${value}'
+</select>

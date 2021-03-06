@@ -1,0 +1,77 @@
+1,安装better-scroll,也可以在github上下载下来哦
+2,导入betterscroll
+3,设置好需要滚动的内容,可以给标签加上高度
+4,组件创建好后创建scroll,然后使用
+5,监听用户滚动到的位置,加载更多,事件监听额外属性
+
+==============================1,安装better-scroll
+项目目录,dos窗口输入命令
+
+cnpm install better-scroll --save
+
+
+==============================2,导入betterscroll
+import BScroll from 'better-scroll'
+#第三方插件这不建议直接导入哦,一般会做一层封装,这里只是一个示范
+
+==============================3,设置好需要滚动的内容,可以给标签加上高度
+<div class="content">
+<ul>
+  <li>123</li>
+  <li>123</li>
+  <li>123</li>
+</ul>
+</div>
+#better-scroll只能对对外层一个标签生效,不能对多个标签生效,但唯一标签下有多少标签都不要紧,所以要包裹起来
+
+  .content{
+ background-color: #008000;
+  height: 800px;
+  width: 420px;
+  margin: 0 auto;
+}
+#给他制定高度,根据情况也可不指定
+==============================4,组件创建好后创建scroll
+<script>
+const bscroll = new BScroll(document.querySelector('.content')
+</script>
+#content 是class类名
+#这是基本使用,如果要添加额外属性,属于第五步
+==============================5,监听用户滚动到的位置
+  // 默认情况下BScroll是不可以实时的监听滚动位置
+  // probe 侦测
+  // 0,1都是不侦测实时的位置
+  // 2: 在手指滚动的过程中侦测, 手指离开后的惯性滚动过程中不侦测.
+  // 3: 只要是滚动, 都侦测.
+  const bscroll = new BScroll(document.querySelector('.content'), {
+    probeType: 3,   //监听滚动位置属性
+    click: true,    //实现内部点击事件属性
+    pullUpLoad: true   //上拉加载更多属性
+  })
+
+----------------------------------------------------
+  bscroll.on('scroll', (position) => {
+    // console.log(position);
+  })
+#附加probeType属性后,使用这个方法,可以获取位置
+
+----------------------------------------------------
+  bscroll.on('pullingUp', () => {
+    console.log('上拉加载更多');
+    // 发送网络请求, 请求更多页的数据
+
+    // 等数据请求完成, 并且将新的数据展示出来后
+    setTimeout(() => {
+      bscroll.finishPullUp()
+    }, 2000)
+  })
+#上啦加载更多
+
+----------------------------------------------------
+  document.querySelector('.btn').addEventListener('click', function () {
+    console.log('------');
+  })
+
+#内部事件监听
+
+==============================

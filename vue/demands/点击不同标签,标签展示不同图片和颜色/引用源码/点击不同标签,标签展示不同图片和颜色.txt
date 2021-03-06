@@ -1,0 +1,41 @@
+思路:
+设置2个插槽,判断某个路由处于活跃的状态,然后就展示哪个插槽
+
+1,定义3个组件,父home.vue,   子find.vue   , 子my.vue
+2,父组件增加link,和activecolor
+3,子组件设置props接收父组件穿过来的link,和activecolor
+4,设置2个插槽或者标签,设置v-if进行判断
+5,添加计算属性,判断是否活跃状态,然后根据状态改变选择使用哪个插槽
+
+
+
+================================2,父组件增加link参数
+#home.vue
+ <tabbar>
+                <tabbaritem link="/home" activecolor="red">
+<div slot="itemdiv">首页</div>
+    
+#link对应的就是路由,涉及到路由切换,这里不做解释
+
+==================================3,子组件设置props接收父组件穿过来的link
+#find.vue
+    props: {
+                  link: {type: String,required: true},
+                  activecolor:{type: String,default:'red'}
+              },
+
+
+==================================4,插槽或者标签,设置v-if进行判断
+#find.vue
+ <div>
+      <slot v-if="isactive" name="itemimg"></slot>
+      <slot v-else  name="itemimgactive"></slot>
+    <div  :style="activestyle"><slot  name="itemdiv"></slot></div>
+</div>
+#这里用v-if对应了2个插槽,第三个插槽不用管
+
+==================================5,添加计算属性,判断是否活跃状态,然后根据状态改变选择使用哪个插槽
+   computed:{
+         isactive() { return this.$route.path.indexOf(this.link) !== -1},
+         activestyle(){return this.isactive ? {color:this.activecolor} : {}}
+          },   

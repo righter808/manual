@@ -1,0 +1,49 @@
+1.创建表
+2,删除表
+3,更改表字段类型
+
+=====================1.创建表
+先选择数据库,然后执行创建操作
+#表基本操作
+CREATE TABLE 表名 (列名 列类型);
+
+CREATE TABLE 表名(
+id INT NOT NULL AUTO_INCREMENT,
+#列名   类型  非空  自增
+title VARCHAR(100) NOT NULL,
+author VARCHAR(40) NOT NULL,
+PRIMARY KEY (id )
+)ENGINE=InnoDB DEFAULT AUTO_INCREMENT=default CHARSET=utf8;
+
+CREATE TABLE 表名(
+id INT NOT NULL AUTO_INCREMENT,
+#列名   类型  非空  自增
+title VARCHAR(100) NOT NULL,
+author VARCHAR(40) NOT NULL,
+PRIMARY KEY (id )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE People (
+  last_name varchar(50) not null,
+  first_name varchar(50) not null,
+  dob date not null,
+  gender enum('m', 'f') not null,
+  key(last_name, first_name, dob)
+);
+
+
+
+#NOT NULL  非空
+#PRIMARY KEY (id ) 设定主键,没设定则不指定即可
+#enum('m', 'f') 非m即f
+#  key(last_name, first_name, dob)  指定索引
+#ENGINE=InnoDB 设定引擎,不写也可以,默认就是这个
+#CHARSET=utf8; 字符串编码
+#AUTO_INCREMENT=22  数据自增从22开始,如果不指定设置为default即可
+
+
+=======================2,删除表
+先选择数据库,然后执行删除操作
+use 数据库名
+DROP TABLE 表名 ;

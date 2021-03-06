@@ -1,0 +1,52 @@
+
+====================获得cc所在的节点
+获得组件所在的节点,在组件方法里访问 this.node 变量：
+start: function () {
+    var node = this.node;
+    node.x = 100;
+}
+
+====================获得cc其它组件
+#getComponent
+start: function () {
+    var label = this.getComponent(cc.Label);
+    var text = this.name + 'started';
+    label.string = text;
+}
+--------------------------写法2
+var rotate = this.getComponent("SinRotate");
+
+====================获得其它cc的节点及其组件
+#方法1:利用属性检查器设置节点
+1,给cc设置一个node属性
+properties: {
+        player: {
+            default: null,
+            type: cc.Node
+        }
+2,层级管理器中,把节点拖进去,就可以访问该节点
+    start: function () {
+        cc.log("The player is " + this.player.name);
+    },
+#然后就可以用 this.player 访问节点,并调用里面的属性
+
+
+====================查找子节点
+tart: function () {
+        var cannons = this.node.children;
+        // ...
+
+----------------
+this.node.getChildByName("Cannon 01");
+
+-----------------
+cc.find("Cannon 01/Barrel/SFX", this.node);
+#当 cc.find 只传入第一个参数时，将从场景根节点开始逐级查找：
+this.backNode = cc.find("Canvas/Menu/Back");
+
+
+====================
+====================
+====================
+====================
+====================

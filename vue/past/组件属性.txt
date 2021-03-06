@@ -1,0 +1,33 @@
+var Child = {
+------template---------
+
+  template: '#Child',
+
+------data---------
+
+  data(){
+    return{
+	  counter:'0'
+	}
+  },
+
+------methods---------
+   methods:{
+    add(){}
+           },
+
+------props---------
+
+   props:{
+     cadd:{
+	   type:Array,
+	   default(){return []},
+	   required:true
+	 },
+      cinfo:{
+	  type:String,
+	  default:'aaa',
+	  required:true
+               }
+            }
+}

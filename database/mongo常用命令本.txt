@@ -1,0 +1,124 @@
+https://www.runoob.com/mongodb/mongodb-create-collection.html
+
+进入docker-mongo
+docker exec -it 604b8f8ec495 mongo
+#604b8f8ec495 这个是容器ID
+#mongo代表什么暂时不知道
+
+show dbs 
+#显示所有库
+
+use test
+#选择test数据库
+#如果test不存在,则会自动创建一个test并进入,如果是mysql就会报错
+
+show collections
+#显示集合
+
+db.createCollection(name, options)
+#创建集合
+#name: 要创建的集合名称
+#options: 可选参数, 指定有关内存大小及索引的选项
+
+
+db.集合名.drop()
+#删除集合
+
+skip公式=(当前页-1)*每页显示数
+
+---------------------查询------------------------------
+
+db.集合名.find()
+db.集合名.find(query, projection)
+#查询数据
+#query ：可选，使用查询操作符指定查询条件
+#projection：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值，只需省略该参数即可（默认省略）。
+
+db.runoob.find().pretty()
+#查询数据
+#.pretty()是为了便于阅读,不影响结果
+
+db.runoob.find({"leixing":"问答题8"}).pretty()
+#查询  ==  数据
+
+db.col.find({"likes":{$lt:50}}).pretty()
+#查询  < 数据
+
+db.col.find({"likes":{$lte:50}}).pretty()
+小于或等于
+
+db.col.find({"likes":{$gt:50}}).pretty()
+大于
+
+db.col.find({"likes":{$gte:50}}).pretty()
+大于或等于
+
+db.col.find({"likes":{$ne:50}}).pretty()
+不等于
+
+db.runoob.find({"leixing":"问答题3", "fenlei":"mongo3"}).pretty()
+and查询
+
+db.col.find({$or:[{"by":"菜鸟教程"},{"title": "MongoDB 教程"}]}).pretty()
+or查询
+
+db.col.find({"likes": {$gt:50}, $or: [{"by": "菜鸟教程"},{"title": "MongoDB 教程"}]}).pretty()
+(A)and(b or c)
+
+db.users.find().sort({id:-1})
+排序,升序查询
+
+db.users.find().sort({id:-1})
+排序,降序查询
+
+db.集合名.find().limit(数量)
+查询 指定数量的 数据
+
+db.集合名.find().limit(10).skip(5)
+查询10条数据,并且跳过5条数据
+
+----------------------聚合查询-----------------------------
+
+db.users.aggregate([{$group : {_id : "$gender", rs : {$sum : 1}}}])
+#分组查询,统计数量
+#$gender:要份的组,
+#rs:命名可以随意,result也可以
+#sum : 1 代表统计总数量,  sun:"age"代表,统计age字段的总和,注意区别
+
+$sum	计算总和。	db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : "$likes"}}}])
+$avg	计算平均值	db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$avg : "$likes"}}}])
+$min	获取集合中所有文档对应值得最小值。	db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$min : "$likes"}}}])
+$max	获取集合中所有文档对应值得最大值。	db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$max : "$likes"}}}])
+$push	在结果文档中插入值到一个数组中。	db.mycol.aggregate([{$group : {_id : "$by_user", url : {$push: "$url"}}}])
+$addToSet	在结果文档中插入值到一个数组中，但不创建副本。	db.mycol.aggregate([{$group : {_id : "$by_user", url : {$addToSet : "$url"}}}])
+$first	根据资源文档的排序获取第一个文档数据。	db.mycol.aggregate([{$group : {_id : "$by_user", first_url : {$first : "$url"}}}])
+$last	根据资源文档的排序获取最后一个文档数据	db.mycol.aggregate([{$group : {_id : "$by_user", last_url : {$last : "$url"}}}])
+
+
+----------------------插入-----------------------------
+
+db.集合名.insert(
+       {fenlei: 'mongo', 
+		leixing: '问答题'})
+#插入数据
+
+db.集合名.insert(
+       {fenlei: 'mongo', 
+		leixing: '问答题'},
+		{fenlei: 'haha', 
+		leixing: '第二条数据'})
+#插入多条数据
+
+for(var i=1;i<=10;i++){
+    db.runoob.insert(
+       {fenlei: 'mongo'+i, 
+		leixing: '问答题'+i})
+}
+#循环插入10条数据
+#因为mongo底层是JavaScript,所以支持JavaScript代码
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+1,设计路由
+2,创建router,
+3,定义router
+	a,导入控制器
+	b,使用控制器方法
+3,导出路由
+4,app引入router.并把router挂在到app中
+#router.js
+#app.js
+
+=================================1,设计路由
+#此处为示例,设计好路由,方便处理
+请求类型   |              请求路径              |  get参数             |    post参数          |     备注
+get        |   /students                        |     id               |                      |   查询学生
+post       |   /edit                            |                      |       id,name,sex    |   编辑学生
+
+=================================
+#router.js
+var fs = require('fs')
+var express = require('express')
+
+const dbcontroller= require("./controller/aacon.js")
+#a,导入控制器
+
+
+var router = express.Router()
+#2,创建router,
+
+----------------------------------3,定义router
+
+
+	router.get('/', function (req, res) {
+	  res.send('nihao ,wo shi luyou !')
+	})
+	#function (req, res) {res.send('nihao ,wo shi luyou !')},可以再次被封装成controller
+	
+	
+	router.post('/stu', dbcontroller.create)
+	#b,使用控制器方法,dbcontroller.create是导入的控制器方法
+	#这个更简洁,注意
+	
+	
+#3,导出路由
+module.exports = router
+
+=================================3,把router挂在到app中
+#app.js
+
+
+app.use(router)
+#把路由容器挂载到 app 服务中
+#中间件,必须在挂在路由之前配置
+
+
+
+

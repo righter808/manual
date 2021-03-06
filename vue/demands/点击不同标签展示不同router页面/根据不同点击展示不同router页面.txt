@@ -1,0 +1,94 @@
+#说明:
+点击home.vue上的cate标签,和my标签,可以跳转到cate.vue和my.vue
+
+1,安装好路由,已安装可忽略
+2,定义好home.vue,  cate.vue, my,vue.
+3,新建文件src/router/index.js,配置路由映射
+4,main.js挂载路由
+5,home.vue设置路由
+
+
+
+===================================================1,安装路由
+安装路由,如果已安装可以忽略安装步骤
+切换到项目目录,运行下面命令
+npm install vue-router --save  运行时依赖
+
+
+===================================================2,定义好home.vue,  cate.vue, my,vue.
+在项目目录下,定义好要映射的vue,譬如home.vue
+
+
+===================================================3,新建文件src/router/index.js,配置路由映射
+请参照
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+// 1.通过Vue.use安装路由
+Vue.use(VueRouter)
+
+// 2.定义路由映射
+const home = () => import('@/views/Home')
+const category = () => import('@/views/Category')
+const shopcart = () => import('@/views/Shopcart')
+const profile = () => import('@/views/Profile')
+
+//路由表.路由表里面的变量已经在定义路由映射里定义好了
+const routes = [
+	{
+		path: '/',
+		redirect: '/home'
+	},
+	{
+		path: '/home',
+		component: home
+	},
+	{
+		path: '/category',
+		component: category
+	},
+	{
+		path: '/shopcart',
+		component: shopcart
+	},
+	{
+		path: '/profile',
+		component: profile
+	},
+]
+
+// 3.创建对象
+const router = new VueRouter({
+	mode: 'history',
+	routes
+})
+
+
+// 4.导出对象
+export default router
+
+===================================================4,main.js挂载路由
+2,进入main.js 导入路由,头部添加下面代码,以及添加router
+import router from './router'
+import Vue from 'vue'
+import App from './App'
+
+Vue.config.productionTip = false
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
+})
+#就是增加个router
+
+
+
+===================================================5,home.vue设置路由
+#需要对应的路由直接写link="/home",即对应的路由映射即可
+ <tabbar>
+                <tabbaritem link="/home" activecolor="red">
+<div slot="itemdiv">首页</div>
+

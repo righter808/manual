@@ -1,0 +1,52 @@
+————html——————
+<div id="app">
+  <runoob :cadd="add" :cuser="user" :cinfo="info">
+</div>
+
+说明：使用子组件，并且子组件props属性cadd绑定到父组件data属性add，
+
+——————js——————
+
+var Child = {
+  template: '#Child',
+  props:{
+     cadd:{
+	   type:Array,
+	   default(){return []},
+	   required:true
+	 },
+      cinfo:{
+	  type:String,
+	  default:'aaa',
+	  required:true
+               }
+            }
+}
+说明：子对象添加props 属性，属性名自定义，譬如cadd
+          如果cadd属性为数组或者对象，指定默认值需要以函数返回，例default(){return []},                如果是普通类型如String,简单返回即可default:'aaa',，这是vue2.5以后的标准
+          required为真，那么父组件必须传值过来，不然报错
+---------------------------------------------------------------------------------
+<template id="Child">
+    <div>
+	 <p>{{cadd}}</p>
+	 <!-- <p>{{cuser}}</p> -->
+	 <p>{{cinfo}}</p>
+	</div>
+</template>
+
+说明：子组件调用子组件的props属性
+---------------------------------------------------------------------------------
+new Vue({
+  el: '#app',
+  components: {
+    'runoob': Child
+  },
+  data:{
+   add:["北京","上海","广州","深圳"],
+   user:[{name:"张三",age:"11",sex:"男"},{name:"李四",age:"99",sex:"女"}],
+   info:"我在哪？"				
+       }
+  
+})
+说明：父组件属性
+

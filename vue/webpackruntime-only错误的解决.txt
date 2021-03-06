@@ -1,0 +1,12 @@
+1，打开webpack.config.js
+
+2，添加配置
+module.exports={
+     resolve:{
+    alias:{
+             'vue$':'vue/dist/vue.esm.js'
+            }
+                 }
+}
+
+说明：就是不在至指定runtime only.js处理，换成vue.esm.js文件处理

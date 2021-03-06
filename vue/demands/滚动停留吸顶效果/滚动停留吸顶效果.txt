@@ -1,0 +1,56 @@
+知道滚动到多少时要获取offset属性,但offset属性会受到图片加载的影响,有时候没加载完,所以就必须监听图片是否加载完成,然后在获取offset值
+
+
+
+#views\home\childComps\HomeSwiper.vue
+#views\home\Home.vue
+
+1,监听图片是否加载完成
+2,获取offset值
+
+
+
+
+================================1,监听图片是否加载完成
+#views\home\childComps\HomeSwiper.vue
+    <swiper-item v-for="item in banners">
+      <a :href="item.link">
+        <img :src="item.image" alt="" @load="imageLoad">
+      </a>
+    </swiper-item>
+
+#@load="imageLoad"设置监听事件
+
+-------------------------------
+    data() {
+      return {
+        isLoad: false
+      }
+    },
+    components: {
+      Swiper,
+      SwiperItem
+    },
+    methods: {
+      imageLoad() {
+        if (!this.isLoad) {
+          this.$emit('swiperImageLoad')
+          this.isLoad = true
+        }
+      }
+#设置对应事件 imageLoad() 方法,这里轮播图有4张图片,但只需要一张图加载完成就可以获得高度,所以,只需要发送一次事件,设置isload属性,默认false,然后做个判断,具体不解析
+
+
+
+==========================2,获取offset值
+#views\home\Home.vue
+        @pullingUp="loadMore">
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"/>
+      <recommend-view :recommends="recommends"/>
+#接收子组件的emit的事件@swiperImageLoad,然后定义方法
+
+-------------------------------------
+#定义1个method获取offsettop
+swiperImageLoad() {
+        this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
+      },

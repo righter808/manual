@@ -1,0 +1,12 @@
+复选框
+<input type="checkbox" name="Bike">
+
+文本框
+<input type="text" name="firstname">
+
+单选框
+<input type="radio" checked="checked" name="Sex" value="male" />
+<input type="radio" name="Sex" value="female" />
+
+隐藏表单框
+<input type="hidden" name="firstname">

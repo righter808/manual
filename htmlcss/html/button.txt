@@ -1,0 +1,13 @@
+————————普通——————
+<button type="submit">Click Me!</button>
+<button type="reset" value="Reset">重置</button>
+<button type="button"  @click="childa">按钮</button>
+
+<input type="submit" value="提交" @click="add">
+<input type="reset" value="重置" @click="add" >
+<input type="button" value="提交" @click="add">
+
+
+——————vue——————
+<button type="button" @click="add" v-for="(item,index) in arr">{{index+1}}我是{{item}}</button>
+

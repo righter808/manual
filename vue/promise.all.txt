@@ -1,0 +1,17 @@
+一个需求,需要有2个请求同时完成才能进行下一步
+ setTimeout模拟的网络请求
+
+Promise.all([
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({name: 'why', age: 18})
+      }, 2000)
+    }),
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({name: 'kobe', age: 19})
+      }, 1000)
+    })
+  ]).then(results => {
+    console.log(results);
+  })

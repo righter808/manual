@@ -1,0 +1,4 @@
+<div id="app">
+  <button v-on:click="say('hi')">Say hi</button>
+  <button @click="say('what')">Say what</button>
+</div>

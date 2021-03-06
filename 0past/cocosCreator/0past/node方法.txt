@@ -1,0 +1,30 @@
+名:
+类型:
+功能:
+传参:
+返回值:
+值:
+示例:
+
+let a : cc.Node = new cc.Node();
+#声名一a变量,类型是cc.node,他里面可以调用下列方法
+
+addComponent
+addChild
+attr
+cleanup
+
+名:active
+功能:激活/关闭节点
+传参:
+返回值:
+值:true, false
+示例:this.node.active = false;
+
+名:parent
+类型:属性
+功能:更改节点的父节点
+传参:
+返回值:
+值:
+示例:

@@ -1,0 +1,20 @@
+dockermysql密码记录
+容器ID:61f58f6d30b8
+mysql
+账号:root
+密码:ljdhome819
+
+
+虚拟机
+root
+ljdhome819
+
+docker mongo 18467d6f0413
+admin
+123456
+
+
+centosenv
+root 123456
+lijunde89 123456
+

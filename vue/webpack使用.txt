@@ -1,0 +1,16 @@
+方式1
+webpack ./aa/main.js ./dist/bundle.js 
+说明：把main.js 打包成bundle.js，webpack自动帮我们处理之间的依赖，
+          如果配置好了webpack的出入口，就不用带路径，直接webpack就可以打包
+
+<script src="./bundle.js"></script>
+说明:html文件直接引入bundle即可
+
+方式2
+webpack
+说明：配置好webpack的出入口，执行webpack可以不带路径，
+          只要是在终端使用webpack ，都是执行的全局webpack，如果要执行本地webpack，可以使                用方式3脚本执行npm run build
+
+方式3
+npm run build
+说明：build可以更改，build对应package.json里的脚本命令

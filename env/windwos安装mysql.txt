@@ -1,0 +1,16 @@
+https://dev.mysql.com/downloads/installer/
+
+1,下载好mysql
+https://dev.mysql.com/downloads/installer/
+下载地址
+2,mysql安装配置
+#错误1:出现密码check失败,
+
+
+
+===============================================================
+#错误1:出现密码check失败,
+出现了 密码check失败,
+方案1:退出安装,把之前的mysql安装彻底删除干净
+https://blog.csdn.net/lvoyee/article/details/104030272
+dos,regedit ,搜索,mysql,把带mysql的都删除掉

@@ -1,0 +1,23 @@
+在css/目录下新建base.css,然后在组件里引用即可,也可以写在组件内部style内部哦,不过容易造成臃肿,一般都是单独引用css文件
+@import "@/assets/css/base.css"
+
+示例:
+<template>
+  <div id="app">
+    <div>首页</div>
+    <div>分类</div>
+    <div>购物车</div>
+    <div>我的</div>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'App'
+}
+</script>
+
+
+<style>
+@import "./assets/css/base.css"
+</style>

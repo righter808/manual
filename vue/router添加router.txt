@@ -1,0 +1,143 @@
+思路:
+安装路由
+定义好组件
+main.js导入路由
+添加路由,配置映射关系
+添加子组件监听事件,定义事件方法,接收props传递参数
+添加父组件传递参数,并添加router-view
+
+
+
+
+====================================安装路由
+安装路由,如果已安装可以忽略安装步骤
+切换到项目目录,运行下面命令
+npm install vue-router --save  运行时依赖
+
+
+====================================定义好组件
+在项目目录下,定义好要映射的vue,譬如home.vue
+
+
+
+
+====================================main.js导入路由
+2,进入main.js 导入路由,头部添加下面代码,以及添加router
+import router from './router'
+import Vue from 'vue'
+import App from './App'
+
+Vue.config.productionTip = false
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
+})
+
+
+-----------添加路由,配置映射关系
+请参照
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+// 1.通过Vue.use安装路由
+Vue.use(VueRouter)
+
+// 2.定义路由映射
+const home = () => import('@/views/Home')
+const category = () => import('@/views/Category')
+const shopcart = () => import('@/views/Shopcart')
+const profile = () => import('@/views/Profile')
+
+//路由表.路由表里面的变量已经在定义路由映射里定义好了
+const routes = [
+	{
+		path: '/',
+		redirect: '/home'
+	},
+	{
+		path: '/home',
+		component: home
+	},
+	{
+		path: '/category',
+		component: category
+	},
+	{
+		path: '/shopcart',
+		component: shopcart
+	},
+	{
+		path: '/profile',
+		component: profile
+	},
+]
+
+// 3.创建对象
+const router = new VueRouter({
+	mode: 'history',
+	routes
+})
+
+
+// 4.到处对象
+export default router
+
+
+
+----------添加router-view----------<router-view></router-view>
+如果要显示对应的路由,需要添加router-view占位,示例代码  ,部分代码省略 
+<div id="app">
+    <router-view></router-view>
+    <tab-bar>
+      <tab-bar-item link="/home">
+        <img src="~assets/tabbar/home.svg" slot="icon" alt="">
+        <img src="~assets/tabbar/home_active.svg" slot="active-icon">
+        <div slot="text">首页</div>
+
+
+===========添加组件监听事件==========
+打开组件,添加时间监听,并且定义好方法,
+this.link是父组件传过来的参数,需要定义个props用来接收
+..........................代表省略部分代码
+----------添加点击事件---@click="itemclick()"
+<template>
+   <div class="tabbaritem" @click="itemclick()">
+  <div>
+      
+..........................定义事件方法
+ methods:{
+      itemclick(){
+     this.$router.replace(this.link)  //如果想让浏览器可以返回,就用push,不想有返回就用replace
+      }
+..........................定义props
+    props: {
+                  link: {
+		type: String,
+                                required: true
+                         }
+              }
+
+
+===========添加父组件传递参数----------link="/home"  --    <router-view></router-view>
+link在子组件需要定义好props 接收,注意router-view要包含在一个div下面,
+    <router-view></router-view>
+    <tab-bar>
+      <tab-bar-item link="/home">
+        <img src="~assets/tabbar/home.svg" slot="icon" alt="">
+        <img src="~assets/tabbar/home_active.svg" slot="active-icon">
+        <div slot="text">首页</div>
+      </tab-bar-item>
+      <tab-bar-item link="/category">
+        <img src="~assets/tabbar/category.svg" slot="icon" alt="">
+
+
+
+
+
+
+
+

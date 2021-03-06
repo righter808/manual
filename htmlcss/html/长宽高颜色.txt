@@ -1,0 +1,22 @@
+<style>
+.background{
+  background-color: #008000;
+  height: 800px;
+  width: 420px;
+  margin: 0 auto;
+}
+
+p
+{
+	color:red;
+	text-align:center;
+} 
+
+#para1
+{
+    text-align:center;
+    background-color:yellow;
+}
+
+.center {text-align:center;}
+</style>

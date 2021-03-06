@@ -1,0 +1,2 @@
+因为centos8 内置集成了podman 的容器工具,和docker冲突,很多莫名其妙
+所以建议重新安装系统,不要集成podman

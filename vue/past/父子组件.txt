@@ -1,0 +1,35 @@
+————html————
+<div id="app">
+	<runoob></runoob>
+</div>
+
+——————js————
+const cpnc1=Vue.extend(
+ {
+   template: 
+     '<div><h1>111!</h1></div>'
+ }
+)
+
+const cpnc2=Vue.extend(
+ {
+   template: 
+     '<div><h1>222!</h1><cpnc1></cpnc1></div>',
+	 components: {
+    'cpnc1': cpnc1
+  }
+ }
+)
+
+new Vue({
+  el: '#app',
+  components: {
+    'runoob': cpnc2
+  }  
+})
+
+说明：创建2个组件，1个vue实例，组件2包含组件1，然后vue实例调用组件2。那么组件2就是组件1的父组件，vue实例调用组件2，等于调用了组件2和组件1.只要在组件2里面加入
+ components: {
+    'cpnc1': cpnc1
+  }
+代码即可

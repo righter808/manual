@@ -1,0 +1,26 @@
+传递参数的方式：
+1，params传递
+     配置路由格式：/router/:id
+     传递的方式：在path后跟对应的值
+     传递后形成的路径：/router/123,/router/abc
+2，query传递
+     配置路由格式，/router,也就是普通配置
+     传递方式：在对象中使用query的key作为传递方式
+     传递后形成的路径：/router?id=123,/router?id=abc
+
+#针对方式2的解析
+1，新建或打开，src\components\profile.vue
+2，配置路由映射   ｛配置路由映射｝
+3，app.vue添加显示
+     #重点：传递参数路由必须是对象，并且用v-bind绑定  ｛代码2｝
+4，取出对象，用$route.query即可取出  ｛代码3｝
+
+--------------#代码2
+<div>
+    <router-link v-bind:to="{path:'profile',query:{name:'why',age:'18'}}" >档案</router-link>
+  </div>
+  <router-view/>
+-----------------代码3
+#src\components\profile.vue  
+<h1>{{$route.query.name}}</h1>
+<h1>{{$route.query.age}}</h1>

@@ -1,0 +1,7 @@
+@property(cc.SpriteFrame)
+face1: cc.SpriteFrame = null;
+
+#更多属性请参考--属性大全.txt
+#cc.SpriteFrame  代表图片
+#@property   注释这是个属性,加上这个注释,控制台就有这个属性了
+#face1  属性名   ,图片为空

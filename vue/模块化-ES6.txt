@@ -1,0 +1,30 @@
+es6标准
+三个文件，es6.html,    es6a.js,   es6b.js
+-----es6.html----------
+<script src="es6b.js" type="module"></script>
+<script src="es6a.js" type="module"></script>
+说明：要使用type=module,才会解析成模块化
+
+----es6a.js导出模块数据----
+导出方式1：先定义后导出
+                  可以导出default,但只能有一个default，导出default别人引用可以自定义命名，因为只                  有一个导出
+var name='xiaoming';
+export{
+name
+}
+扩展：default
+export default name;
+
+导出方式2：直接定义导出
+                  可以导出default,但只能有一个default，导出default别人引用可以自定义命名，因为只                  有一个导出
+export var name='xiaoming'
+扩展：default
+export default name;
+
+--------es6b.js导入es6a.js---------
+import {name} from './es6a.js';
+console.log(name);
+
+-----------统一全部导入------------
+import * as aaa from './es6a.js';
+说明:将暴露的数据方法，一次性全部导入

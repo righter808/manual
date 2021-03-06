@@ -1,0 +1,11 @@
+<form action="/demo/demo_form.asp">
+账户:
+<br>
+<input type="text" name="account" value="" placeholder="请输入用户名">
+<br>
+密码:<br>
+<input type="password" name="password" value="" placeholder="请输入密码">
+<br><br>
+<input type="submit" value="提交" @click="add">
+<input type="reset" value="重置" @click="add">
+</form> 

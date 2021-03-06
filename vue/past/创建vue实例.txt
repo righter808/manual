@@ -1,0 +1,9 @@
+——————————html部分————————
+<div id="app">
+	<runoob></runoob>
+</div>
+
+——————————JS部分————————
+new Vue({
+  el: '#app'
+})

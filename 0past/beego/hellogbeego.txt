@@ -1,0 +1,38 @@
+1,安装beego
+2,创建hellobeego项目
+3,依赖管理
+4,运行hellobeego项目
+
+
+======================1,安装beego
+go get github.com/beego/bee
+#打开dos,任意目录即可,会安装到gopath目录,可能遇到速度慢的解决办法
+----------------------------------------
+第一步:
+https://www.ipaddress.com/ip-lookup
+在这个里面去查找下面两个地址的实时IP
+github.com 的IP 地址
+github.global.ssl.fastly.net 的IP地址
+
+第二部:
+C:\Windows\System32\drivers\etc 在etc里面找到hosts
+修改如下：
+
+140.82.114.3 github.com
+199.232.5.194 github.global.ssl.fastly.net
+
+再重新执行安装语句就可以成功了，而且很快
+
+
+=====================2,创建beego项目
+bee new hellobeego
+#打开dos,创建hellobeego项目
+
+
+=====================3,依赖管理
+#项目目录,dos
+go mod init 
+
+
+======================4,运行hellobeego项目
+bee run

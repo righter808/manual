@@ -1,0 +1,17 @@
+https://github.com/nosqlclient/nosqlclient
+
+docker pull mongoclient/mongoclient
+
+要安装最新的稳定版本：
+
+docker pull mongoclient/mongoclient:4.0.0
+
+然后，您可以将其作为守护程序运行：
+
+docker run -d -p 3000:3000 mongoclient/mongoclient
+
+要设置流星工作所需的外部mongodb，可以设置MONGO_URL环境变量。否则，nosqlclient将mongodb安装到容器中并使用它。
+
+要保留连接和设置，只需将/data/db目录绑定到本地计算机，如下所示。
+
+docker run -d -p 3000:3000 -v <your_path>:/data/db mongoclient/mongoclient

@@ -1,0 +1,21 @@
+以前是通过router-link来跳转和传递，现在通过button点击来跳转以及传递参数
+
+
+文件：src\components\user.vue
+          user没有传参数，profile传了参数
+<template>
+<div>
+  <h1>{{userID}}</h1>
+  <input type="button" value="用户" @click="userClick">
+  <input type="button" value="档案" @click="profileClick">
+</div>
+</template>
+<script lang="ts">
+export default  {
+name:"user",
+methods:{
+  userClick(){this.$router.push('/user/'+this.userID)},
+  profileClick(){this.$router.push({path:'/profile',query:{name:'kobe',age:'18'}})}
+}
+}
+</script>

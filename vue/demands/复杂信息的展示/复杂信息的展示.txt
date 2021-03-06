@@ -1,0 +1,96 @@
+开发的时候,复杂的信息,可以专门设置一个类用来保存,传入网络获取的参数然后new个对象,通过这个对象提取这些数据,就等于
+把所有的复杂数据存放在一个对象里
+
+E:\resources\教程\vuejs资料和代码\Day 11\课堂代码\supermall\src\network\detail.js
+E:\resources\教程\vuejs资料和代码\Day 11\课堂代码\supermall\src\views\detail\Detail.vue
+1,设置class(class就相当于设置一个数据结构,用来接收传来的数据)
+2,构造实体对象,然后取出数据展示
+
+
+============================================1,设置class(class就相当于设置一个数据结构,用来接收传来的数据)
+#E:\resources\教程\vuejs资料和代码\Day 11\课堂代码\supermall\src\network\detail.js
+import {request} from "./request";
+
+export function getDetail(iid) {
+  return request({
+    url: '/detail',
+    params: {
+      iid
+    }
+  })
+}
+
+export class Goods {
+  constructor(itemInfo, columns, services) {
+    this.title = itemInfo.title
+    this.desc = itemInfo.desc
+    this.newPrice = itemInfo.price
+    this.oldPrice = itemInfo.oldPrice
+    this.discount = itemInfo.discountDesc
+    this.columns = columns
+    this.services = services
+    this.realPrice = itemInfo.lowNowPrice
+  }
+}
+
+#等价于,java里设置一个实体类
+export class Shop {
+  constructor(shopInfo) {
+    this.logo = shopInfo.shopLogo;
+    this.name = shopInfo.name;
+    this.fans = shopInfo.cFans;
+    this.sells = shopInfo.cSells;
+    this.score = shopInfo.score;
+    this.goodsCount = shopInfo.cGoods
+  }
+}
+
+
+export class GoodsParam {
+  constructor(info, rule) {
+    // 注: images可能没有值(某些商品有值, 某些没有值)
+    this.image = info.images ? info.images[0] : '';
+    this.infos = info.set;
+    this.sizes = rule.tables;
+  }
+}
+
+
+============================================2,构造实体对象,然后取出数据展示
+#E:\resources\教程\vuejs资料和代码\Day 11\课堂代码\supermall\src\views\detail\Detail.vue
+ data() {
+      return {
+        iid: null,
+        topImages: [],
+        goods: {},
+        shop: {},
+        detailInfo: {},
+        paramInfo: {}
+      }
+    },
+    created() {
+      // 1.保存传入的iid
+      this.iid = this.$route.params.iid
+
+      // 2.根据iid请求详情数据
+      getDetail(this.iid).then(res => {
+        // 1.获取顶部的图片轮播数据
+        console.log(res);
+        const data = res.result;
+        this.topImages = data.itemInfo.topImages
+
+        // 2.获取商品信息
+        this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
+
+        // 3.创建店铺信息的对象
+        this.shop = new Shop(data.shopInfo)
+
+        // 4.保存商品的详情数据
+        this.detailInfo = data.detailInfo;
+
+        // 5.获取参数的信息
+        this.paramInfo = new GoodsParam(data.itemParams.info, data.itemParams.rule)
+      })
+    },
+
+

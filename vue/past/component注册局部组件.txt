@@ -1,0 +1,53 @@
+——————html——————
+<div id="app">
+	<runoob ref="com1"></runoob>
+</div>
+
+-------------子组件模板------
+<template id="Child">
+   <div><p>Hello!VUE!</p></div>
+</template>
+-------------子组件------
+<script>
+var Child = {
+  template: '#Child',
+  data(){
+	return{
+	  counter:'1'
+	}
+		},
+  methods:{
+    childa(){console.log('childa')}
+          },
+  props:{
+      cadd:{
+	   type:Array,
+	   default(){return []},
+	   required:true
+	       },
+		}
+}
+
+
+new Vue({
+  el: '#app',
+  components: {
+    'runoob': Child
+  },
+  data:{
+     fatherb:'hello!'
+        },
+  methods:{
+    btnclick(){
+	           <!-- this.$children[0].childa(); 这种访问方式很少-->
+			   console.log(this.$refs.com1.counter);
+	          }
+	      },
+})
+
+</script>
+
+说明：局部组件和全局组件的区别是的，vue实例里加入了，components
+components: {
+    'runoob': Child
+  }

@@ -1,0 +1,15 @@
+    
+//鼠标点击事件
+onLoad () {
+        this.node.on('mousedown', this.onClicked, this);
+    }
+
+//键盘事件
+    onLoad () {
+        cc.systemEvent.on('keydown', this.onKeyDown, this);
+    }
+
+//键盘事件
+    onKeyDown( evt : cc.Event.EventKeyboard) {
+        if(evt.keyCode == cc.macro.KEY.left) 
+        {

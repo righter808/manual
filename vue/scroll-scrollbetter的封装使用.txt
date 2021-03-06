@@ -1,0 +1,100 @@
+#这里对better-scroll做的封装,引用就用封装好的
+
+1,封装better-scroll到scroll
+2,组件引用scroll
+
+======================================1,封装better-scroll到scroll
+#这里可以直接拷贝所有代码,到src\components\common\scroll.vue中
+#这里用的插槽,替换,父组件传过来的会被替换掉,所以直接使用即可
+<template>
+  <div class="wrapper" ref="wrapper">
+    <div class="content">
+      <slot></slot>
+    </div>
+  </div>
+</template>
+
+<script>
+  import BScroll from 'better-scroll'
+
+  export default {
+    name: "Scroll",
+    props: {
+      probeType: {
+        type: Number,
+        default: 0
+      },
+      pullUpLoad: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        scroll: null,
+        message: '哈哈哈'
+      }
+    },
+    mounted() {
+      // 1.创建BScroll对象
+      this.scroll = new BScroll(this.$refs.wrapper, {
+        click: true,
+        probeType: this.probeType,
+        pullUpLoad: this.pullUpLoad
+      })
+
+      // 2.监听滚动的位置
+      this.scroll.on('scroll', (position) => {
+        // console.log(position);
+        this.$emit('scroll', position)
+      })
+
+      // 3.监听上拉事件
+      this.scroll.on('pullingUp', () => {
+        this.$emit('pullingUp')
+      })
+    },
+    methods: {
+      scrollTo(x, y, time=300) {
+        this.scroll.scrollTo(x, y, time)
+      },
+      finishPullUp() {
+        this.scroll.finishPullUp()
+      }
+    }
+  }
+</script>
+
+<style scoped>
+
+</style>
+
+
+
+=======================================2,组件引用scroll
+#父组件直接使用即可,要注意设置高度
+<scroll class="content"
+            ref="scroll"
+            :probe-type="3"
+            @scroll="contentScroll"
+            :pull-up-load="true"
+            @pullingUp="loadMore">
+      <home-swiper :banners="banners"/>
+      <recommend-view :recommends="recommends"/>
+      <feature-view/>
+      <tab-control class="tab-control"
+                   :titles="['流行', '新款', '精选']"
+                   @tabClick="tabClick"/>
+      <good-list :goods="showGoods"/>
+    </scroll>
+--------------------------
+ .content {
+    overflow: hidden;
+
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
+  }
+#父组件css高度设置

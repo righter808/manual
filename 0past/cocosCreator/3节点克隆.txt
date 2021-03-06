@@ -1,0 +1,34 @@
+1,创建A节点,B节点
+2,创建一个js脚本
+3,将js脚本附加到A节点,注意:A节点设置了一个target属性
+4,将B节点拖动到A节点里的脚本属性中
+5,克隆B节点
+
+
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+	  target: {
+      default: null,
+      type: cc.Node,
+    }},
+	#A节点设置了一个target属性,
+	
+    onLoad () {
+		var scene = cc.director.getScene();
+		var node = cc.instantiate(this.target);
+		node.parent = scene;
+		node.setPosition(110, 110);
+		#克隆B节点
+		
+	},
+
+    start () {
+
+    },
+
+    // update (dt) {},
+});
+

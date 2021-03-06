@@ -1,0 +1,22 @@
+————————html——————
+<div id="app">
+	<ul>
+	<li v-for="(item,index) in arr">{{index+1}}我是{{item}}</li>
+	</ul>
+</div>
+
+说明：item 和{{item}}名字可以修改，但必须对应，
+         arr指向组件data的变量名
+         index指的是索引，
+
+——————js——————
+new Vue({
+  el: '#app',
+  data:{
+   arr:["北京","上海","广州","深圳"],
+      vegatables:[                                
+       {name:"张三",age:"11",sex:"男"},
+       {name:"李四",age:"99",sex:"女"}
+                       ]     
+       }
+  })

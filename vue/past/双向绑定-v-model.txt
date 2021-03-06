@@ -1,0 +1,31 @@
+<div id="app">
+	<runoob></runoob>	
+</div>
+<template id="Child">
+  <div>
+    <input type="text" name="firstname" v-model="counter">
+    <a> {{counter}}</a>
+  </div>
+</template>
+
+说明：v-model 绑定到子组件的counter数据，双向绑定
+
+--------------------------------------
+
+<script>
+var Child = {
+  template: '#Child',
+    data(){
+    return{
+	  counter:'0'
+	}
+  }
+}
+
+new Vue({
+  el: '#app',
+  components: {
+    'runoob': Child
+  }
+})
+</script>

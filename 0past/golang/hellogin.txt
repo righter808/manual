@@ -1,0 +1,60 @@
+1,安装go
+2,改变环境变量(可省略,go自动指定了环境变量)
+3,管理工程目录
+4,安装gin
+5,新建main.go,导入gin,copy代码
+
+
+
+====================================1,安装go
+https://golang.google.cn/doc/install?download=go1.15.6.windows-amd64.msi
+#安装后,输入
+go env 查看安装情况
+
+====================================2,改变环境变量(可省略,go自动指定了环境变量)
+
+新建一个目录，名称自定义，比如D:/go
+添加系统变量，
+GOPATH ,目录指定为D:/go
+
+然后保存
+
+
+删除掉默认的GOPATH环境变量量
+
+===================================3,管理工程目录
+gopath目录下新建三个目录
+bin
+src  存放源码
+pkg
+
+===================================4,安装gin
+打开dos窗口,任意文件位置皆可,输入下命令,下载gin
+go get -u github.com/gin-gonic/gin
+之后gopath目录下会下载好gin
+
+====================================5,新建main.go,导入gin,copy代码
+package  main
+
+import  "github.com\gin-gonic\gin"  
+import  "gin-master"
+
+func Hello (ctx *gin.Context){
+      ctx.String(code:200,format:"hello gin")
+                                            }
+func main(){
+  router :=gin.Default()
+  router.GET(relativePath:"/”,Hellogin)
+  router.Run(   addr:":9000"  )
+                  }
+
+1，新建一个go文件
+package main
+import  "fmt"
+func main(){
+fmt.Println("hello,go!")
+}
+2，切换到这个go文件的目录下，打开cmd
+3，执行go build
+     会生成一个exe文件
+4，cmd运行这个exe文件

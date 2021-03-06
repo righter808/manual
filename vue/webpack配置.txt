@@ -1,0 +1,17 @@
+文件名  
+webpack.config.js
+
+目录  
+根目录
+const path=require("path")
+
+module.exports={
+  entry:'./src/main.js',
+  output:{
+                  path:'./dist',
+                  filename:'bundle.js'
+              }
+
+}
+
+

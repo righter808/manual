@@ -1,0 +1,50 @@
+#ref绑定到组件上,通过this.refs.refname获取的是组件对象
+#ref绑定到某个元素上,通过this.refs.refname获取的是元素对象
+
+<div id="app">
+	<runoob ref="com1"></runoob>
+</div>
+
+<template id="Child">
+   <div><p>Hello!VUE!</p></div>
+</template>
+
+说明：使用子组件，并且子组件加上ref
+
+var Child = {
+  template: '#Child',
+  data(){
+	return{
+	  counter:'1'
+	}
+		},
+  methods:{
+    childa(){console.log('childa')}
+          },
+  props:{
+      cadd:{
+	   type:Array,
+	   default(){return []},
+	   required:true
+	       },
+		}
+}
+
+new Vue({
+  el: '#app',
+  components: {
+    'runoob': Child
+  },
+  data(){
+     fatherb:'hello!'
+        },
+  methods:{
+    btnclick(){
+	           <!-- this.$children[0].childa(); 这种访问方式很少-->
+			   console.log(this.$refs.com1.counter);
+	          }
+	      },
+})
+
+说明：父组件方法，用this.$refs.com1 访问子组件，并调用子组件的属性和方法
+         this.$children[0]  也可以用这种带坐标的方法访问，带坐标的方法，子组件挂载不用加ref

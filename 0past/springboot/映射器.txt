@@ -1,0 +1,14 @@
+/*1.新建一个类，类名随意，添加@configuration
+* 2.实现WebMvcConfigurer接口
+* 3.重写addViewControllers方法，idea可以ctrl+o快速重写
+* 4.传入了registry对象，调用他的方法addViewController
+* 5.使用addViewController将网页指向另外一个地址
+* */
+@Configuration
+public class mvcConfig implements  WebMvcConfigurer{
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/about.html").setViewName("/index.html");
+
+    }
+}

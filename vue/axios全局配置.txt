@@ -1,0 +1,29 @@
+1,定义baseurl
+2,删除掉axios.all里的baseurl
+#没删除前的url
+http://123.207.32.32:8000/home/multidata',  
+#定义baseurl后的url
+/home/multidata',   
+#axios一般用的时候不会用全局,因为涉及到不同的服务器,所以一般用实例
+
+=========1,定义baseurl
+axios.default.baseURL = 'http://123.207.32.32:8000'
+axios.default.timeout = 500
+
+===========2,删除掉axios.all里的baseurl
+axios.all(
+[axios(
+{
+  url:'/home/multidata',   
+  method:'get',    
+  params:{type:'pop',page:1}     
+}
+),    
+axios({
+  url:'/home/multidata',   
+  method:'get',     
+  params:{type:'pop',page:1}     
+})])  
+.then(results =>{
+console.log( results );
+})

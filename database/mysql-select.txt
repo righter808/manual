@@ -1,0 +1,14 @@
+SELECT 列名称 FROM 表名称
+SELECT * FROM 表名称
+
+SELECT DISTINCT 列名称 FROM 表名称
+
+
+SELECT 列名称 FROM 表名称 WHERE 列 运算符 值
+SELECT * FROM Persons WHERE City='Beijing'
+#使用单引号来环绕文本值
+SELECT * FROM Persons WHERE Year>1965
+#如果是数值，请不要使用引号。
+
+
+

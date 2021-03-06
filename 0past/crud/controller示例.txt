@@ -1,0 +1,74 @@
+@RestController
+@RequestMapping("/stu")
+public class StuController {
+    @Autowired
+    private StuService stuService;
+
+
+    @RequestMapping(value = "/delete",method = RequestMethod.DELETE)
+    public Student findStuById(int id){
+       return stuService.findStuByID(id);
+    }
+
+    /**
+     * 用户注册方法
+     * @param student
+     * @return
+     */
+    @RequestMapping("/registerStu")
+    public Student registerStu(Student student){
+        return stuService.save(student);
+    }
+
+    /**
+     * 修改学生
+     * @param student
+     * @return
+     */
+    @RequestMapping("/updateStu")
+    public Student updateStu(Student student){
+        return stuService.update(student);
+    }
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    @GetMapping("/deleteStu")
+    public String deleteStu(int id){
+        stuService.delete(id);
+        return "Deleted";
+    }
+
+    /**
+     * 登陆
+     * @param name
+     * @param password
+     * @return
+     */
+    @GetMapping("/loginStu")
+    public Student loginStu(String name,String password){
+        return stuService.login(name,password);
+    }
+
+    /**
+     * 分页查询
+     * @param p
+     * @param response
+     * @return
+     */
+    @GetMapping("/queryStu")
+    public Page<Student> findByPage(Integer p, HttpServletResponse response){
+        response.setHeader("Access-Control-Allow-Origin","*");//设置响应头。
+    if(p==null||p<0){
+        p = 0;
+    }else {
+        p -= 1;
+    }
+    return stuService.findAll(p,5);//设置为每次查询五个
+    }
+
+
+}
+

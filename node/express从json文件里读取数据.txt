@@ -1,0 +1,78 @@
+1,假设node,模板arttemplate,express,都已经安装好,   db.json文件存在
+
+1,读取json数据
+2,转换json数据为自己需要的数据
+3,把转换好的数据传给模板引擎
+4,html展示
+#student.js
+
+====================================1,读取json数据
+#student.js
+#引入文件模块,和需要处理的json数据
+var fs = require('fs')
+var dbPath = './db.json'
+
+#文件系统读取json数据
+exports.findById = function (id, callback) {
+  fs.readFile(dbPath, 'utf8', function (err, data) {
+    if (err) {
+      return callback(err)
+    }
+    var students = JSON.parse(data).students
+    var ret = students.find(function (item) {
+      return item.id === parseInt(id)
+    })
+    callback(null, ret)
+  })
+}
+
+====================================2,转换json数据为自己需要的数据
+#student.js
+var students = JSON.parse(data).students
+
+
+====================================3,把转换好的数据传给模板引擎
+router.get('/students', function (req, res) {
+  Student.find(function (err, students) {
+    if (err) {
+      return res.status(500).send('Server error.')
+    }
+    res.render('index.html', {
+      fruits: [
+        '苹果',
+        '香蕉',
+        '橘子'
+      ],
+      students: students
+    })
+  })
+})
+
+====================================4,html展示
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>爱好</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ each students }}
+              <tr>
+                <td>{{ $value.id }}</td>
+                <td>{{ $value.name }}</td>
+                <td>{{ $value.gender }}</td>
+                <td>{{ $value.age }}</td>
+                <td>{{ $value.hobbies }}</td>
+                <td>
+                  <a href="/students/edit?id={{ $value.id }}">编辑</a>
+                  <a href="/students/delete?id={{ $value.id }}">删除</a>
+                </td>
+              </tr>
+              {{ /each }}
+            </tbody>
+          </table>

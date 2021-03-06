@@ -1,0 +1,24 @@
+说明：子模板要主要套上div标签
+         子模板加上<slot></slot>就表示预留了插槽
+         父模板使用子模板，然后往里面加东西就可以使用，如果没有加就会显示默认值
+         给插槽加上name指定名称，使用的时候用slot="name"指定替换的插槽
+
+-----------------------
+<div id="app">
+     <Child>
+         <a slot="1"></a>
+         <div slot="itemdiv">首页</div>
+         <img slot="itemimg" src="" alt=""></img>
+
+
+
+   </Child>
+</div>
+
+<template id="Child">
+<div>
+   <slot name="1">1</slot>
+   <slot name="itemdiv">2</slot>
+   <slot name="itemimg">2</slot>
+</div>
+</template>

@@ -1,0 +1,150 @@
+1,设计路由
+2,定义router,然后导出
+3,app引入router.并把router挂在到app中
+#router.js
+#app.js
+
+=================================1,设计路由
+#此处为示例,设计好路由,方便处理
+请求类型   |              请求路径              |  get参数             |    post参数          |     备注
+get        |   /students                        |     id               |                      |   查询学生
+post       |   /edit                            |                      |       id,name,sex    |   编辑学生
+
+=================================2,定义router
+#router.js
+var fs = require('fs')
+var express = require('express')
+
+// 1. 创建一个路由容器
+var router = express.Router()
+
+router.get('/students', function (req, res) {
+  Student.find(function (err, students) {
+    if (err) {
+      return res.status(500).send('Server error.')
+    }
+    res.render('index.html', {
+      fruits: [
+        '苹果',
+        '香蕉',
+        '橘子'
+      ],
+      students: students
+    })
+  })
+})
+
+/*
+ * 渲染添加学生页面
+ */
+router.get('/students/new', function (req, res) {
+  res.render('new.html')
+})
+
+/*
+ * 处理添加学生
+ */
+router.post('/students/new', function (req, res) {
+  // 1. 获取表单数据
+  // 2. 处理
+  //    将数据保存到 db.json 文件中用以持久化
+  // 3. 发送响应
+  Student.save(req.body, function (err) {
+    if (err) {
+      return res.status(500).send('Server error.')
+    }
+    res.redirect('/students')
+  })
+})
+
+/*
+ * 渲染编辑学生页面
+ */
+router.get('/students/edit', function (req, res) {
+  // 1. 在客户端的列表页中处理链接问题（需要有 id 参数）
+  // 2. 获取要编辑的学生 id
+  // 
+  // 3. 渲染编辑页面
+  //    根据 id 把学生信息查出来
+  //    使用模板引擎渲染页面
+
+  Student.findById(parseInt(req.query.id), function (err, student) {
+    if (err) {
+      return res.status(500).send('Server error.')
+    }
+    res.render('edit.html', {
+      student: student
+    })
+  })
+})
+
+/*
+ * 处理编辑学生
+ */
+router.post('/students/edit', function (req, res) {
+  // 1. 获取表单数据
+  //    req.body
+  // 2. 更新
+  //    Student.updateById()
+  // 3. 发送响应
+  Student.updateById(req.body, function (err) {
+    if (err) {
+      return res.status(500).send('Server error.')
+    }
+    res.redirect('/students')
+  })
+})
+
+/*
+ * 处理删除学生
+ */
+router.get('/students/delete', function (req, res) {
+  // 1. 获取要删除的 id
+  // 2. 根据 id 执行删除操作
+  // 3. 根据操作结果发送响应数据
+
+  Student.deleteById(req.query.id, function (err) {
+    if (err) {
+      return res.status(500).send('Server error.')
+    }
+    res.redirect('/students')
+  })
+})
+
+#3. 把 router 导出
+module.exports = router
+
+=================================3,把router挂在到app中
+#app.js
+
+var express = require('express')
+var router = require('./router')
+#引入router
+var bodyParser = require('body-parser')
+
+var app = express()
+
+app.use('/node_modules/', express.static('./node_modules/'))
+app.use('/public/', express.static('./public/'))
+
+app.engine('html', require('express-art-template'))
+
+// 配置模板引擎和 body-parser 一定要在 app.use(router) 挂载路由之前
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
+
+app.use(router)
+#把路由容器挂载到 app 服务中
+#中间件,必须在挂在路由之前配置
+
+app.listen(3000, function () {
+  console.log('running 3000...')
+})
+
+module.exports = app
+
+
+

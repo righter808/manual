@@ -1,0 +1,43 @@
+说明：
+子组件模板定义一个插槽slot，加上:data="arr"  data自定义名字，arr指向子组件数据arr
+父组件模板 slot-scope="slot"  表示指向slot插槽作用域，在通过slot.data获取数据，data和子组件模板的data名称要一致，
+   
+
+<div id="app">
+    <Child>
+	</Child>
+    <Child>
+	  <template slot-scope="slot">
+	     <span>{{slot.data.join("-")}}</span>
+	  </template>
+	</Child>
+</div>
+
+<template id="Child">
+<div>
+   <slot :data="arr">
+   <ul>
+     <li v-for="item in arr">我是{{item}}</li>
+   </ul>
+   </slot>
+</div>
+</template>
+
+<script>
+var Child = {
+  template: '#Child',
+  data(){
+	return{
+	  arr:["北京","上海","广州","深圳"]
+	}
+		}
+}
+
+new Vue({
+  el: '#app',
+  components: {
+    'Child': Child
+  }
+})
+
+</script>

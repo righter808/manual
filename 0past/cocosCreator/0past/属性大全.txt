@@ -1,0 +1,34 @@
+@property(cc.SpriteFrame)
+face1: cc.SpriteFrame = null;
+
+#cc.SpriteFrame  代表图片
+#@property   注释这是个属性,加上这个注释,控制台就有这个属性了
+#face1  属性名   ,图片为空
+
+    // 整型
+    @property(cc.Integer)
+    intVar: number = 0;
+    // 浮点型
+    @property(cc.Float)
+    floatVar: number = 0;
+    // 布尔型
+    @property(cc.Boolean)
+    boolVar: boolean = false;
+    // 节点
+    @property(cc.Node)
+    nodeVar: cc.Node = null;
+    // 节点数组
+    @property([cc.Node])
+    nodeArrVar: Array<cc.Node> = [];
+    // Label
+    @property(cc.Label)
+    labelVar: cc.Label = null;
+    // 预制体
+    @property(cc.Prefab)
+    prefabVar: cc.Prefab = null;
+    // 点
+    @property(cc.Vec2)
+    vec2Var: cc.Vec2 = cc.v2();
+    // 自定义节点
+    @property(Player)
+    palyerVar: Player = null;

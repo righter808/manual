@@ -1,0 +1,26 @@
+说明:
+https://www.runoob.com/cssref/css3-pr-justify-content.html
+
+justify-content: space-around;
+
+示例:
+#main {
+    width: 400px;
+    height: 150px;
+    border: 1px solid #c3c3c3;
+    display: -webkit-flex; /* Safari */
+    -webkit-justify-content: space-around; /* Safari 6.1+ */
+   
+    justify-content: space-around;
+}
+
+
+属性值:
+
+flex-start	默认值。项目位于容器的开头。	测试 »
+flex-end	项目位于容器的结尾。	测试 »
+center	项目位于容器的中心。	测试 »
+space-between	项目位于各行之间留有空白的容器内。	测试 »
+space-around	项目位于各行之前、之间、之后都留有空白的容器内。	测试 »
+initial	设置该属性为它的默认值。请参阅 initial。	测试 »
+inherit	从父元素继承该属性。请参阅 inherit。	

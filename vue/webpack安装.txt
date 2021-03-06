@@ -1,0 +1,14 @@
+1，安装好node
+     node -v
+    查看node版本
+
+2，安装好npm  
+    npm version 
+   查看npm版本
+
+3,安装webpack
+  cnpm install -g webpack@3.6.0
+说明：cnpm是使用的国内镜像下载，npm使用的国外下载 -g全局安装
+
+4，查看webpack版本
+   webpack -version

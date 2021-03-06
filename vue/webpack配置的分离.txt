@@ -1,0 +1,14 @@
+新建一个config文件夹
+新建3个配置文件，base.config.js   dev.config.js   production.config.js
+
+项目目录下，安装合并配置文件的插件
+npm install webpack-merge --save-dev
+
+分离后，需要将package.json改下build，dev的路径也需要配哦~
+"build": "webpack --config ./build/prod.config.js"
+
+打包目录也需要改哦~   ./dist  改为   ../dist
+output:{
+ path:path.resolve(__dirname,'../dist'),
+}
+

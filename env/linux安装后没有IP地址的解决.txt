@@ -1,0 +1,10 @@
+我用的是centos8,安装后没有IP地址
+
+进入cd /etc/sysconfig/network-scripts/
+
+然后 vi ifcfg-enp0s3 这个每个·人都不一样 自己看着改
+
+吧最后的ONBOOT改为yes ,然后保存退出
+
+然后重启 在查看ip 就有了
+

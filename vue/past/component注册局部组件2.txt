@@ -1,0 +1,33 @@
+html首页只有1个app挂载
+说明：这种方法需要安装vue.loader
+文件:main.js,目录：src/js
+说明：把main.js和app.js分离
+import Vue from 'vue'
+import app from './vue/app.vue'
+
+new Vue({
+  el: '#app',
+  template:<app/>,
+  components: {app},
+})
+
+文件:app.vue，目录：src/vue
+说明：app.vue单独的文件，被导入到main.js
+<template>
+   <div>123</div>
+</template>
+<script>
+  export default{
+  name:"app",
+  data(){
+           return{
+                         a='456'
+                     }
+             },
+     methods:{
+           btnclick(){}
+                   }
+}
+}
+</script>
+<style></style>

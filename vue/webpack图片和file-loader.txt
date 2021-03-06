@@ -1,0 +1,20 @@
+引用地址：
+https://webpack.js.org/loaders/file-loader/
+
+$ npm install file-loader --save-dev
+
+说明：
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+        },
+      },
+    ],
+  },
+};
+Fun

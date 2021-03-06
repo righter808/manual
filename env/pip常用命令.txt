@@ -1,0 +1,5 @@
+pip3 list 
+列出包
+
+安装Scrapy框架
+pip3 install Scrapy

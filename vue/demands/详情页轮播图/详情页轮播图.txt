@@ -1,0 +1,96 @@
+详情页轮播图最好也做好封装,detailswiper轮播图展示的数据,要首页home.vue传过去,res中有所有的数据
+
+1,新建detailswiper.vue并注册为detail.vue的子组件
+2,从result中取出轮播图的数据
+3,把数据传给detailswiper.vue
+4,父组件绑定下数据
+5,使用轮播图,并设置尺寸
+
+#E:\resources\教程\vuejs资料和代码\Day 11\课堂代码\supermall\src\views\detail\Detail.vue
+#E:\resources\教程\vuejs资料和代码\Day 11\课堂代码\supermall\src\views\detail\childComps\DetailSwiper.vue
+
+=========================================================2,从result中取出轮播图的数据
+#E:\resources\教程\vuejs资料和代码\Day 11\课堂代码\supermall\src\views\detail\Detail.vue
+    data() {
+      return {
+        iid: null,
+        topImages: [],
+        goods: {},
+        shop: {},
+        detailInfo: {},
+        paramInfo: {}
+      }
+    },
+#先设计好存储轮播图的池子,topImages: [],
+created() {
+      // 1.保存传入的iid
+      this.iid = this.$route.params.iid
+
+      // 2.根据iid请求详情数据
+      getDetail(this.iid).then(res => {
+        // 1.获取顶部的图片轮播数据
+        console.log(res);
+        const data = res.result;
+        this.topImages = data.itemInfo.topImages
+#获取顶部的图片轮播数据
+
+=========================================================3,把数据传给detailswiper.vue
+#E:\resources\教程\vuejs资料和代码\Day 11\课堂代码\supermall\src\views\detail\childComps\DetailSwiper.vue
+    props: {
+      topImages: {
+        type: Array,
+        default() {
+          return []
+        }
+      }
+    }
+  }
+  #设置好接收父组件传来的数据结构
+  
+  =========================================================4,父组件绑定下数据
+  #E:\resources\教程\vuejs资料和代码\Day 11\课堂代码\supermall\src\views\detail\Detail.vue
+  <template>
+  <div id="detail">
+    <detail-nav-bar class="detail-nav"/>
+    <scroll class="content" ref="scroll">
+      <detail-swiper :top-images="topImages"/>
+      <detail-base-info :goods="goods"/>
+      <detail-shop-info :shop="shop"/>
+      <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"/>
+      <detail-param-info :param-info="paramInfo"/>
+    </scroll>
+  </div>
+</template>
+#<detail-swiper :top-images="topImages"/>,然后子组件props里就有了数据
+
+=========================================================5,使用轮播图
+#E:\resources\教程\vuejs资料和代码\Day 11\课堂代码\supermall\src\views\detail\childComps\DetailSwiper.vue
+  import {Swiper, SwiperItem} from 'components/common/swiper'
+
+  export default {
+    name: "DetailSwiper",
+    components: {
+      Swiper,
+      SwiperItem
+    },
+  #导入封装好的轮播组件,并注册
+  
+  <template>
+  <swiper class="detail-swiper">
+    <swiper-item v-for="item in topImages">
+      <img :src="item" alt="">
+    </swiper-item>
+  </swiper>
+</template>
+#使用swiper即可
+
+<style scoped>
+  .detail-swiper {
+    height: 300px;
+    overflow: hidden;
+  }
+</style>
+
+#设置尺寸
+
+  

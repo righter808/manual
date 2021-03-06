@@ -1,0 +1,120 @@
+引用:
+https://www.npmjs.com/package/mysql
+
+思路:
+前提已经下载好mysql
+1,下载node操作mysql的包
+2,链接
+
+步骤:
+
+bug留言板:
+---------------------------------------------------------------------------------
+时间           
+20200208 报错了! 'Client does not support authentication protocol requested by server  
+20200208 解决了!无法读取到数据
+20200208 TypeError: Cannot read property 'solution' of undefined
+20200208 上面的,我估计是mysql权限问题,我试试
+20200208 搞不定啊,老铁!这应该不是权限的问题,去国外找找
+20200208 奇怪的问题,插进去了数据,但还是报错.
+
+---------------------------------------------------------------------------------
+
+参数表:
+
+步骤拆分:
+=================================================================================1,下载
+项目dos
+cnpm install mysql --save
+=================================================================================2,链接并crud
+#项目目录,一个js,这个目录要引入了mysql包哦!
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : '192.168.0.114',
+  port     : '3306'
+  user     : 'root',
+  password : 'ljdhome819',
+  database : 'a1'
+});
+ 
+connection.connect();
+ 
+#注意,这里  'SELECT * FROM tabale'  替换sql语句
+connection.query('SELECT * FROM tabale', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
+
+connection.query('INSERT INTO users VALUES(NULL, "admin", "123456")', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results);
+});
+ 
+connection.end();
+=================================================================================
+=================================================================================
+=================================================================================
+
+留言拆分:
+*********************************************************************************
+20200208 报错了! 'Client does not support authentication protocol requested by server
+https://blog.csdn.net/yubin1285570923/article/details/83352491
+按照这个引用试试
+他主要是这些
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
+flush privileges;
+
+还是不行
+ ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentic
+ ation protocol requested by server; consider upgrading MySQL client
+ 
+*********************************************************************************bug2
+20200208 解决了!
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+FLUSH PRIVILEGES;
+*********************************************************************************
+20200208 TypeError: Cannot read property 'solution' of undefined
+我真是见了鬼了!艹!
+
+
+     throw err; // Rethrow non-MySQL errors
+      ^
+
+TypeError: Cannot read property 'solution' of undefined
+    at Query.<anonymous> (E:\developer\code\node\level\mysql.js:13:47)
+    at Query.<anonymous> (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\Connection.js:526:10)
+    at Query._callback (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\Connection.js:488:16)
+    at Query.Sequence.end (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\sequences\Sequence.js:83:24)
+    at Query._handleFinalResultPacket (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\sequences\Query.js:149:8)
+    at Query.OkPacket (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\sequences\Query.js:74:10)
+    at Protocol._parsePacket (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\Protocol.js:291:23)
+    at Parser._parsePacket (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\Parser.js:433:10)
+    at Parser.write (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\Parser.js:43:10)
+    at Protocol.write (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\Protocol.js:38:16)
+
+*********************************************************************************
+https://jingyan.baidu.com/article/46650658e2fb85f549e5f835.html
+搞不定,其实就是赋予了用户   % 所有权限.
+*********************************************************************************
+20200208 奇怪的问题,插进去了数据,但还是报错.
+修改代码,执行插入命令,数据插进去了,数据库已经有了数据,但报错.
+也就是说查询不到数据
+
+
+E:\developer\code\node\level\node_modules\_mysql@2.18.1@mysql\lib\protocol\Parser.js:437
+      throw err; // Rethrow non-MySQL errors
+TypeError: Cannot read property 'solution' of undefined
+    at Query.<anonymous> (E:\developer\code\node\level\mysql.js:13:47)
+    at Query.<anonymous> (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\Connection.js:526:10)
+    at Query._callback (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\Connection.js:488:16)
+    at Query.Sequence.end (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\sequences\Sequence.js:83:24)
+    at Query._handleFinalResultPacket (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\sequences\Query.js:149:8)
+    at Query.OkPacket (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\sequences\Query.js:74:10)
+    at Protocol._parsePacket (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\Protocol.js:291:23)
+    at Parser._parsePacket (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\Parser.js:433:10)
+    at Parser.write (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\Parser.js:43:10)
+    at Protocol.write (E:\developer\code\node\level\node_modules\[4m_mysql@2.18.1@mysql[24m\lib\protocol\Protocol.js:38:16)
+
+
+

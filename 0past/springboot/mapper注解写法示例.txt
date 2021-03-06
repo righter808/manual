@@ -1,0 +1,9 @@
+import org.apache.ibatis.annotations.Mapper;
+import providerStart.entity.country;
+
+@Mapper 
+public interface PersonMapper2 {
+
+          
+	public List<Person> getPersonList2();
+}

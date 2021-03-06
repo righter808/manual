@@ -1,0 +1,13 @@
+    
+----------图片
+@property(cc.SpriteFrame)
+ bulletIcon: cc.SpriteFrame = null;
+
+----------音效
+@property(cc.AudioClip)
+audioFire : cc.AudioClip = null;
+
+----------节点
+@property(cc.Node)
+audioFire : cc.Node = null;
+

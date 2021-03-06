@@ -1,0 +1,54 @@
+取出api里的数据经常会出现,这个错误,
+Error in render: "TypeError: Cannot read property '10' of undefined
+是什么原因?怎么解决?
+
+
+因为请求是异步获取数据，所以最先开始item是一个空对象。item.tournament即为undefined。item.tournament.name就会报错
+解决办法：加一个v-if的判断条件
+代码:
+1:name: 'home',data() {return {resu: ''} }.最开始这里还是空
+2:created(){
+axios({ url:'http://localhost:3000/haha  }).then(res=>{console.log(res),this.resu=res},)},
+请求的数据还没有被赋值到resu
+3,<a v-if="resu.data">{{resu.data[0]}}</a>
+渲染的时候加个判断即可
+
+====================================
+如下代码~
+<template>
+  <div>home
+  <a v-if="resu.data">{{resu.data[0]}}</a>
+  #这里加个v-if判断,数据是否存在
+
+    <textbar></textbar>
+  </div>
+  
+
+</template>
+
+<script>
+import textbar from '@/components/common/textbar' 
+import axios from 'axios'
+
+export default {
+  name: 'home',
+    data() {
+      return {
+        resu: ''
+      }
+    },
+  components:{  textbar},
+  created(){
+    axios({
+	  url:'http://localhost:3000/haha '
+       }).then(res=>{console.log(res),this.resu=res},
+      )
+  },
+  mounted(){},
+  beforecreate(){}
+}
+</script>
+
+
+<style scoped>
+</style>

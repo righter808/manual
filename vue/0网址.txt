@@ -1,0 +1,16 @@
+web-vue组件库
+https://2x.antdv.com/docs/vue/introduce-cn/
+
+web-vue-router官方文档网址
+https://router.vuejs.org/zh/installation.html
+
+web-webpack官方文档
+https://webpack.js.org/
+https://webpack.js.org/loaders/
+
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+#直接嵌入到html里,可以使用vue组件
+
+
+https://vant-contrib.gitee.io/vant/#/zh-CN/grid
+vant

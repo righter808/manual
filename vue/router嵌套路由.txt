@@ -1,0 +1,26 @@
+1，src\component下新建一个news.vue,mesaage.vue。里面添加后内容
+2，希望这2个组件都是在首页里展示，即嵌套路由，打开  src\router\index.ts。把这2个组件设置成home首页的子路由，示例    {代码1}，记得懒加载子路由  示例  {代码2}，变量名注意对应哦~
+3，切换到  src\components\Home.vue，添加  router-view和router-link，  {代码3}     用来展示homeNews和HomeMessage，会替换掉router-view
+------------------------------------------------------------------------------------------------
+#代码1
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    children:[
+    { path: 'news',component: HomeNews,},{    path: 'message',component: HomeMesaage,}
+]
+  },
+#添加一个chilren数组即可
+------------------------------------------------------------------------------------------------
+#代码2
+const Home= () =>import('../component/Home')
+const HomeNews= () =>import('../component/HomeNews')
+const HomeMessage= () =>import('../component/HomeMessage')
+------------------------------------------------------------------------------------------------
+#代码3
+  <div id="nav">
+    <router-link to="/Home/news" >新闻</router-link> |
+    <router-link to="/Home/message" >消息</router-link>
+  </div>
+    <router-view></router-view>

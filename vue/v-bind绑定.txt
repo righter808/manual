@@ -1,0 +1,24 @@
+<div v-bind:class="{ 'active': isActive }"></div>  或者
+
+
+<div :class="{ 'active': isActive }"></div>
+
+isactive  是组件内部的变量,这个变量通常为true  或false
+
+active  是样式,譬如一个样式类
+
+项目更新:
+20210122  tabbar项目
+如果用插槽来绑定样式,因为插槽会被替换掉,所以样式不会起作用,最好是在插槽外面在包裹一层div,在绑定样式,示例
+      <div  :class="{ 'active': isactive }"><slot  name="itemdiv"></slot></div>
+active是样式,isactive是设置的变量名  ,itemdiv是插槽名
+
+
+=============
+还可以绑定自定义属性,譬如
+
+ <good-list :goods="showGoods"/>
+
+<tab-control :titles="['流行', '新款', '精选']"
+#这里的goods和titles都是自定义的属性,可以和data或者方法里goods和titles绑定,
+['流行', '新款', '精选']"其实可以写在data里

@@ -1,0 +1,149 @@
+思路:
+点击某个商品,获取某个商品的ID,根据ID获取对应的数据,然后展示出来
+
+#components\content\goods\GoodsListItem.vue
+#views\detail\Detail.vue
+#network\detail.js
+#App.vue
+
+1,监听商品点击
+2,设置点击对应方法
+3,增加详情页view
+4,配置详情页路由
+5,详情页拿到传过来的ID
+6,涉及到请求数据,对详情数据做一层封装
+7,把roter-view 的detail排除下
+
+============================================================================1,监听商品点击
+#components\content\goods\GoodsListItem.vue
+<template>
+  <div class="goods-item" @click="itemClick">
+    <img :src="goodsItem.show.img" alt="" @load="imageLoad">
+#@click="itemClick"
+
+============================================================================2,设置点击对应方法
+#components\content\goods\GoodsListItem.vue
+    methods: {
+      imageLoad() {
+        this.$bus.$emit('itemImageLoad')
+      },
+      itemClick() {
+        this.$router.push('/detail/' + this.goodsItem.iid)
+      }
+    }
+#'/detail/' + this.goodsItem.iid  这里是动态路由的方法传递参数
+============================================================================4,配置详情页路由
+const Detail = () => import('../views/detail/Detail')
+
+  {
+    path: '/detail/:iid',
+    component: Detail
+  }
+#部分代码省略
+============================================================================5,详情页拿到传过来的ID
+#views\detail\Detail.vue
+
+    data() {
+      return {
+        iid: null,
+        topImages: [],
+        goods: {},
+        shop: {},
+        detailInfo: {},
+        paramInfo: {}
+      }
+    },
+#先设置个变量,用来保存传过来的ID
+
+    created() {
+      // 1.保存传入的iid
+      this.iid = this.$route.params.iid
+
+      // 2.根据iid请求详情数据
+      getDetail(this.iid).then(res => {
+        // 1.获取顶部的图片轮播数据
+        console.log(res);
+        const data = res.result;
+        this.topImages = data.itemInfo.topImages
+
+        // 2.获取商品信息
+        this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
+
+        // 3.创建店铺信息的对象
+        this.shop = new Shop(data.shopInfo)
+
+        // 4.保存商品的详情数据
+        this.detailInfo = data.detailInfo;
+
+        // 5.获取参数的信息
+        this.paramInfo = new GoodsParam(data.itemParams.info, data.itemParams.rule)
+      })
+    },
+#created之后,根据ID获取数据
+
+============================================================================6,涉及到请求数据,对详情数据做一层封装
+#network\detail.js
+import {request} from "./request";
+
+export function getDetail(iid) {
+  return request({
+    url: '/detail',
+    params: {
+      iid
+    }
+  })
+}
+
+export class Goods {
+  constructor(itemInfo, columns, services) {
+    this.title = itemInfo.title
+    this.desc = itemInfo.desc
+    this.newPrice = itemInfo.price
+    this.oldPrice = itemInfo.oldPrice
+    this.discount = itemInfo.discountDesc
+    this.columns = columns
+    this.services = services
+    this.realPrice = itemInfo.lowNowPrice
+  }
+}
+
+
+export class Shop {
+  constructor(shopInfo) {
+    this.logo = shopInfo.shopLogo;
+    this.name = shopInfo.name;
+    this.fans = shopInfo.cFans;
+    this.sells = shopInfo.cSells;
+    this.score = shopInfo.score;
+    this.goodsCount = shopInfo.cGoods
+  }
+}
+
+
+export class GoodsParam {
+  constructor(info, rule) {
+    // 注: images可能没有值(某些商品有值, 某些没有值)
+    this.image = info.images ? info.images[0] : '';
+    this.infos = info.set;
+    this.sizes = rule.tables;
+  }
+}
+
+============================================================================7,把roter-view 排除下
+##App.vue
+#这部不设置,roter-view因为设置了keepalive,所以detail页面就始终是原来的
+<template>
+  <div id="app" class="wrapper">
+    <keep-alive exclude="Detail">
+      <router-view/>
+    </keep-alive>
+    <main-tab-bar/>
+  </div>
+</template>
+#exclude  Detail  就可以了,so easy
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+1.安装vue
+切换到项目目录下执行命令
+cnpm install vue --save
+说明：去掉-dev，-dev代表开发时依赖，vue因为运行也需要依赖，所以去掉-dev
+
+2，使用vue
+js文件里，加入下面代码，然后就可以使用vue
+import Vue from 'vue'

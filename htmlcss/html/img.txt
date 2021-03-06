@@ -1,0 +1,8 @@
+<img src="smiley-2.gif" alt="显示文本" width="42" height="42">
+
+说明：alt：如果无法显示图像，浏览器将显示替代文本
+
+
+    <a href="https://act.mogujie.com/zzlx67">
+      <img src="~assets/img/home/recommend_bg.jpg" alt="">
+    </a>

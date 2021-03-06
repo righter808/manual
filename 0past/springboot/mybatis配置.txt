@@ -1,0 +1,9 @@
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+ //XML文件扫描 ,如果用直接开发，就可以不写这个
+  type-aliases-package: providerStart.entity
+ //扫描实体类，,如果用直接开发，就可以不写这个
+  configuration:
+    map-underscore-to-camel-case: true
+ //驼峰命名
+

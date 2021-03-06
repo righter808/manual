@@ -1,0 +1,6 @@
+@SpringBootApplication
+public class runto2application {
+    public static void main(String[] args) {
+        SpringApplication.run(runto2application.class, args);
+    }
+}

@@ -1,0 +1,66 @@
+1,安装
+2,配置
+3,使用
+#app.js
+#views/index.art
+
+可参考官方文档
+https://aui.github.io/art-template/express/
+
+================================================1,安装
+#项目dos
+
+cnpm install --save art-template
+cnpm install --save express-art-template
+
+#也可以一次性安装2个,以空格分隔
+cnpm install --save art-template express-art-template
+
+================================================2,配置
+#app.js
+#核心代码
+#app.engine('art', require('express-art-template'));
+#代码解析:当渲染,以art结尾的文件时,使用模板引擎,如果要html结尾,把art改成html即可
+#express为response提供的render方法,默认是不可使用的,但配置了模板引擎,就可以使用了
+#express有个约定,开发人员把所有的视图都放在views目录下,会默认去views目录下找文件,也可以在app.set里改目录
+#譬如res.render('index.art'   ,index.art   ==views/index.art
+
+
+var express = require('express');
+var app = express();
+
+// view engine setup
+app.engine('art', require('express-art-template'));
+
+----------------------------------------------------
+app.set('view', {
+    debug: process.env.NODE_ENV !== 'production'
+});
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'art');
+#如果不需要改views目录,这段代码可以注释掉
+----------------------------------------------------
+
+// routes
+app.get('/', function (req, res) {
+    res.render('index.art', {
+        user: {
+            name: 'aui',
+            tags: ['art', 'template', 'nodejs']
+        }
+    });
+});
+
+================================================
+#views/index.art
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+{{user.name}}
+</body>
+</html>
+#直接双大括号,使用{{user.name}} 就会渲染得到模板引擎传过来的user: {name: 'aui',tags: ['art', 'template', 'nodejs']}

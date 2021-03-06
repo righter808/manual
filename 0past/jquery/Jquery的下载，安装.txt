@@ -1,0 +1,15 @@
+Jquery的下载，安装，使用
+引入jquery
+远程引入jquery
+
+
+Jquery的下载，安装，使用
+
+下载地址：https://jquery.com/download/
+
+本地引入jquery
+<script src="jquery-3.2.1.min.js"></script>
+
+远程引入jquery
+<script src="https://lib.baomitu.com/jquery/3.5.1/jquery.js"></script>
+//地址：https://cdn.baomitu.com/jquery

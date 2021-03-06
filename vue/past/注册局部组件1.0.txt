@@ -1,0 +1,41 @@
+——————html——————
+<div id="app">
+	<runoob></runoob>
+</div>
+
+——————模板——————
+<template id="Child">
+   <div><p>Hello!VUE!</p></div>
+</template>
+——————js——————
+<script>
+var Child = {
+  template: '#Child',
+  data(){
+    return{
+	  counter:'0'
+	}
+  },
+  methods:{
+    add(){
+	  this.counter++
+	},
+	plus(){
+	 this.counter--
+	}
+  }
+}
+
+new Vue({
+  el: '#app',
+  components: {
+    'runoob': Child
+  }
+})
+
+</script>
+
+说明：局部组件和全局组件的区别是的，vue实例里加入了，components
+components: {
+    'runoob': Child
+  }

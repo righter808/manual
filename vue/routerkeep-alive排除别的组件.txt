@@ -1,0 +1,7 @@
+keep-alive可以使组件保持活跃状态,但有的组件需要排除在外,要重新创建
+
+<keep-alive exclude="profile">
+  <router-view/>
+</keep-alive>
+
+#exclude="profile" 这里是正则表达式,不能随便加空格

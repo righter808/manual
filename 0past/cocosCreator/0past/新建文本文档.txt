@@ -1,0 +1,5 @@
+name	function	exsample	
+active	激活/关闭节点	this.node.active = false;	
+parent	更改节点的父节点	this.node.parent = parentNode;	
+children	返回节点的所有子节点数组。	this.node.children	
+childrenCount	将返回节点的子节点数量。	this.node.childrenCount	

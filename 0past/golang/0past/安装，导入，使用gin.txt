@@ -1,0 +1,22 @@
+—————————————安装gin—————————————  
+go get -u github.com/gin-gonic/gin    
+
+//说明：cmd窗口输入，自动下载到go环境变量的src文件夹下
+
+—————————————导入gin—————————————    
+import  "github.com\gin-gonic\gin"     
+
+//说明：项目文件头部复制，地址根据自己的命名改变
+
+—————————————示例代码——————————
+package  main
+import  "gin-master"
+
+func Hello (ctx *gin.Context){
+      ctx.String(code:200,format:"hello gin")
+                                            }
+func main(){
+  router :=gin.Default()
+  router.GET(relativePath:"/”,Hello)
+  router.Run(   addr:":9000"  )
+                  }

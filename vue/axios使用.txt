@@ -1,0 +1,55 @@
+1,安装axios,已安装的可以忽略此步骤
+2,组件导入axios
+3,使用axios
+#这是简单的使用,实际项目中需要多层封装,请参考下面思路
+
+1,安装axios,参考--axios使用
+2,封装网络模块,参考--axios网络请求的封装
+3,组件调用网络模块,参考--axios组件调用网络模块
+
+
+
+=============1,安装axios
+切换到项目目录,输入下面命令
+cnpm install axios --save  
+
+==========2,组件导入axios
+import axios from 'axios'
+
+===========3,使用axios
+#url:要请求服务器的地址,//http://httpbin.org是做网络请求模拟的网站   #http://123.207.32.32:8000/home/multidata  这个是老师的数据接口
+#axios如果不指定请求类型,默认是get请求,axios有get,post请求
+<script>
+import axios from 'axios'
+export default {
+  name: 'home',
+    data() {
+      return {
+        resu: ''} },
+  components:{  textbar},
+  created(){
+     axios({
+	  url:'http://123.207.32.32:8000/home/multidata '
+       }).then(res=>{console.log(  res),this.resu=res},  )}}
+</script>
+//请求地址的参数,也可以不要params{},直接放到url后面,也是一样.如      http://123.207.32.32:8000/home/multidata?type=pop&page=1  
+
+============================
+#post
+
+let fm = new FormData();
+fm.append("id",1);
+fm.append("name","测试");
+axios({
+    url:'/api/yyy',
+	//api地址
+    method:'post',
+	//提交方式
+    data:fm
+	//注意这里不需要转成json字符串，axios会自动识别该数据是form表单数据还是对象数据
+	//person可以是formdata对象
+}); 
+
+
+
+

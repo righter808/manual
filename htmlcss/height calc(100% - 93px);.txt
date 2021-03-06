@@ -1,0 +1,8 @@
+
+
+https://www.runoob.com/try/try.php?filename=trycss_func_calc
+
+height:calc(100% - 93px);
+#这是css的计算属性
+表示高度是100%高度-93px,得到的高度就是height
+

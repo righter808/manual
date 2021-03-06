@@ -1,0 +1,5 @@
+v-text="message"
+{{message}}
+
+<p v-text="message"></p>
+<p>{{message}}</p>

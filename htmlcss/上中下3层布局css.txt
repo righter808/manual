@@ -1,0 +1,26 @@
+  #home {
+    /*padding-top: 44px;*/
+    height: 100vh;
+    position: relative;
+  }
+
+//100vh表示100%视口单位
+
+
+  .content {
+    overflow: hidden;
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
+  }
+//上下留44px和49px
+
+
+  .tab-control {
+    position: sticky;
+    top: 44px;
+    z-index: 9;
+  }
+//z-index表示层叠顺序

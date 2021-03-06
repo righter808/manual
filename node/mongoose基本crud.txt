@@ -1,0 +1,218 @@
+引用:
+https://github.com/mongodb/node-mongodb-native
+https://mongoosejs.com/
+https://docs.mongodb.com/guides/ 
+
+思路:
+#前提已正确安装mongoodb,如未安装请参考docker/安装mongoodb
+#官方的比较麻烦,老师推荐用mongose操作
+
+1,安装mongoose
+2,配置mongoose
+3,执行增删改查
+3,查询数据看是否成功保存
+#db.js
+
+步骤:
+
+bug留言板:
+---------------------------------------------------------------------------------
+时间         bug简要                 debugid  结果
+20200208 按照官方的操作出错            bug1   不行
+20200208 再按照runoob的教程试试        bug2   不行
+20200208 按照官方的试试,               bug3   不行
+20200208 降低了mongo的版本             bug4   不行
+20200208 中文文档落后啊,用英文官方文档!
+20200208 提示 not authorized on test to execute command   #说是权限问题
+20200209 因为你们安装的时候设置了需要权限,auth,你们是用docker创建的,
+         docker run -itd --name mongo4.2.12 -p 27017:27017 a554fe3e4b7f --auth  
+		 要把这个auth去掉啊!
+---------------------------------------------------------------------------------
+
+参数表:
+
+步骤拆分:
+=================================================================================1,安装mongoose
+项目dos
+cnpm install mongoose --save
+=================================================================================2,新建db.js复制代码
+#db.js
+
+#1.导入mongosee ,并连接数据库
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://192.168.0.114:27017/test', {useNewUrlParser: true, useUnifiedTopology: true});
+#示例中连接的数据库test不用必须存在,当第一条数据插入后,自动就创建了
+
+
+#2,设计表结构
+  const { Schema } = mongoose;
+
+  const userSchema = new Schema({
+    title:  String, // String is shorthand for {type: String}
+    author: String,
+    body:   String,
+    comments: [{ body: String, date: Date }],
+    date: { type: Date, default: Date.now },
+    hidden: Boolean,
+    meta: {
+      votes: Number,
+      favs:  Number
+    }
+  });
+#required: true 相当于 sql 的非空
+
+
+#3. 将文档结构发布为模型
+var User = mongoose.model('User', userSchema)
+#userSchema 对应 表schema的结构名,
+#第一个参数：传入一个大写名词单数字符串用来表示你的数据库名称
+#mongoose 会自动将大写名词的字符串生成 小写复数 的集合名称
+#例如这里的 User 最终会变为 users 集合名称
+
+=================================================================================3,执行增删改查
+#第二部做好后,就可以执行增删改查了,用node,mongoose框架操作,mongo数据库
+**********************
+#region /新增数据
+**********************
+var admin = new User({
+  username: 'zs',
+  password: '123456',
+  email: 'admin@admin.com'
+})
+
+admin.save(function (err, ret) {
+  if (err) {
+    console.log('保存失败')
+  } else {
+    console.log('保存成功')
+    console.log(ret)
+  }
+})
+
+
+**********************
+#region /查询数据
+**********************
+User.find(function (err, ret) {
+  if (err) {
+    console.log('查询失败')
+  } else {
+    console.log(ret)
+  }
+})
+
+User.find({
+  username: 'zs'
+}, function (err, ret) {
+  if (err) {
+    console.log('查询失败')
+  } else {
+    console.log(ret)
+  }
+})
+
+User.findOne({
+  username: 'zs'
+}, function (err, ret) {
+  if (err) {
+    console.log('查询失败')
+  } else {
+    console.log(ret)
+  }
+})
+**********************
+#endregion /查询数据
+**********************
+
+
+
+**********************
+#region /删除数据
+**********************
+User.remove({
+  username: 'zs'
+}, function (err, ret) {
+  if (err) {
+    console.log('删除失败')
+  } else {
+    console.log('删除成功')
+    console.log(ret)
+  }
+})
+**********************
+#endregion /删除数据
+**********************
+
+
+**********************
+#region /更新数据
+**********************
+User.findByIdAndUpdate('5a001b23d219eb00c8581184', {
+  password: '123'
+}, function (err, ret) {
+  if (err) {
+    console.log('更新失败')
+  } else {
+    console.log('更新成功')
+  }
+})
+**********************
+#endregion /更新数据
+**********************
+
+=================================================================================
+=================================================================================
+
+留言拆分:
+*********************************************************************************bug1
+我按照官方的地址配置,如下,报错请看   错误信息1,很多人说要设置useNewUrlParser: true,试一下
+mongoose.connect('mongodb://192.168.0.114:27017/test');
+
+错误信息1
+(node:15944) DeprecationWarning: current URL string parser is deprecated, and will be removed in 
+a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:15944) DeprecationWarning: current Server Discovery and Monitoring engine is deprecated, and will 
+be removed in a future version. To use the new Server Discover and Monitoring engine, pass option { useUnifie
+dTopology: true } to the MongoClient constructor.
+
+debug
+https://www.imooc.com/wenda/detail/592064
+改了连接地址为,如下,就是添加了useNewUrlParser: true
+mongoose.connect('mongodb://192.168.0.114:27017/test',{ useNewUrlParser: true });
+继续报错继续报错,不过报的是11496,不太一样了
+(node:11496) DeprecationWarning: current Server Discovery and Monitoring engine 
+is deprecated, and will be removed in a future version. To use the new Server Discover an
+d Monitoring engine, pass option { useUnifiedTopology: true } to the MongoClient constructor.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+*********************************************************************************bug2
+https://www.runoob.com/nodejs/nodejs-mongodb.html
+新建个js
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://192.168.0.114:27017/test";
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  console.log("数据库已创建!");
+  db.close();
+});
+显示连接成功,数据库创建
+还是不行,这个其实是用原生的连接,不是用mongose
+
+*********************************************************************************bug3
+https://mongoosejs.com/docs/deprecations.html
+按照官方的改,还是不行,算了,估计是版本的问题,干嘛要放弃?降低版本不就得了?
+*********************************************************************************bug4
+把mogo版本从最新 降低到了老师的3.4.10.还是报错
+在降低mongoose试试?但是,mongoose直接安装的,没有指定版本,老火,难道是docker和虚拟机的问题?,算了把,先用mysql吧.
+*********************************************************************************
+20200208 中文文档落后啊,用英文官方文档!
+用英文官方文档就没错了,我艹
+
+*********************************************************************************
+20200208 提示 not authorized on test to execute command 
+这个网上说是没有用户和权限的问题
+
+
+
+

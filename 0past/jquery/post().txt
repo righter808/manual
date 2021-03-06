@@ -1,0 +1,8 @@
+$.post(
+     "/try/ajax/demo_test_post",
+     data:{
+        "name":$("#username".val())
+        age:"13"},
+     success:function(data){
+        alert("数据: \n" + data + "\n状态: " + status);
+    })

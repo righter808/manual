@@ -1,0 +1,2 @@
+UPDATE table SET title='学习 C++' WHERE id=3;
+#更新 table表  id=3的数据,设置title=学习c++

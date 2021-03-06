@@ -1,0 +1,29 @@
+
+
+
+
+设置了一个定时器,每隔3秒执行一次move,
+两种定义方式有什么区别吗?我怎么感觉没区别?问题出在哪?
+move(){
+ 		var pos=this.node.x;
+		pos+=50
+		console.log(pos)}
+打印结果,0.50,50,50,50
+	
+	
+move(){		
+		this.node.x+=50;
+		console.log(this.node.x)}
+打印结果:50,100,150,200,结果正常
+
+
+	move(){
+		console.log("move is doing")
+	    this.node.x+=50;
+		console.log(this.node.x)
+		
+			    this.node.x+=50;
+		console.log(this.node.x)
+	
+	
+	}

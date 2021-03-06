@@ -1,0 +1,8 @@
+Druid 0.1.18之后版本都发布到maven中央仓库中，所以你只需要在项目的pom.xml中加上依赖就可以了。。例如：
+
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>druid</artifactId>
+		<version>${druid-version}</version>
+	</dependency>
+也可以选择Maven仓库查找公共的仓库地址：http ://www.mvnrepository.com/artifact/com.alibaba/druid

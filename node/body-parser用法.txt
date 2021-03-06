@@ -1,0 +1,40 @@
+#官方文档
+https://www.expressjs.com.cn/resources/middleware/body-parser.html
+
+1,安装
+2,配置
+3,使用
+
+#用来解析表单post内容
+=================================================================1,安装
+cnpm install body-parser --save
+#项目dos
+
+=================================================================2,配置
+
+
+var bodyParser = require('body-parser')  
+#引入
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+#配置
+
+
+
+-------------------------------------------------
+app.use(function (req, res) {
+  res.setHeader('Content-Type', 'text/plain')
+  res.write('you posted:\n')
+  res.end(JSON.stringify(req.body, null, 2))
+})
+=================================================================3,使用
+#req.body即可生效
+
+app.use(function (req, res) {
+  res.setHeader('Content-Type', 'text/plain')
+  res.write('you posted:\n')
+  res.end(JSON.stringify(req.body, null, 2))
+})
+
+#req.body  即可解析出post表单内容

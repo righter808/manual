@@ -1,0 +1,64 @@
+https://www.runoob.com/docker/centos-docker-install.html
+
+1,安装
+2,检查
+3,设置开机启动
+
+留言:
+20200211 centos8安装docker出现错误,problem with installed package podman
+20200211 试试我的方案1
+20200211 貌似不行
+20200211 这是centos7的安装,centos复杂点,具体请参考另外的档案,centos8安装docker
+20200211 楼上错了,是因为centos8集成了podman容器,和docker冲突,
+         要想centos8用上docker,要注意安装系统时,精简安装,不要把podman装上去了
+===================================1,安装
+任意dos 
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+即可自动安装
+
+
+
+===================================2,检查
+sudo systemctl start docker  启动docker成功即代表安装成功
+
+===================================3,设置开机启动
+systemctl enable docker.service
+
+
+===================================
+20200211 centos8安装docker出现错误,problem with installed package podman
+
+# Executing docker install script, commit: 3d8fe77c2c46c5b7571f94b42793905e5b3e42e4
++ sh -c 'yum install -y -q yum-utils'
+warning: /var/cache/dnf/baseos-929b586ef1f72f69/packages/yum-utils-4.0.17-5.el8.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID 8483c65d: NOKEY
+Importing GPG key 0x8483C65D:
+ Userid     : "CentOS (CentOS Official Signing Key) <security@centos.org>"
+ Fingerprint: 99DB 70FA E1D7 CE22 7FB6 4882 05B5 55B3 8483 C65D
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
++ sh -c 'yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo'
+Adding repo from: https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
++ '[' stable '!=' stable ']'
++ sh -c 'yum makecache'
+CentOS Linux 8 - AppStream          8.4 kB/s | 4.3 kB     00:00    
+CentOS Linux 8 - BaseOS             6.4 kB/s | 3.9 kB     00:00    
+CentOS Linux 8 - Extras             2.5 kB/s | 1.5 kB     00:00    
+Docker CE Stable - x86_64           4.0 kB/s | 9.2 kB     00:02    
+Metadata cache created.
++ '[' -n '' ']'
++ sh -c 'yum install -y -q docker-ce'
+Error: 
+ Problem: problem with installed package podman-2.0.5-5.module_el8.3.0+512+b3b58dca.x86_64
+  - package podman-2.0.5-5.module_el8.3.0+512+b3b58dca.x86_64 requires runc >= 1.0.0-57, but none of the providers can be installed
+  - package containerd.io-1.4.3-3.1.el8.x86_64 conflicts with runc provided by runc-1.0.0-68.rc92.module_el8.3.0+475+c50ce30b.x86_64
+  - package containerd.io-1.4.3-3.1.el8.x86_64 obsoletes runc provided by runc-1.0.0-68.rc92.module_el8.3.0+475+c50ce30b.x86_64
+  - package docker-ce-3:20.10.3-3.el8.x86_64 requires containerd.io >= 1.4.1, but none of the providers can be installed
+  - cannot install the best candidate for the job
+  - package runc-1.0.0-64.rc10.module_el8.3.0+479+69e2ae26.x86_64 is filtered
+  
+===================================
+20200211 试试我的方案1
+https://blog.csdn.net/ykenan/article/details/111237517
+
+解决: 运行下面的代码, 查询执行试试
+yum erase podman buildah
+  

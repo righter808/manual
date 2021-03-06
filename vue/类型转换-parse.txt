@@ -1,0 +1,2 @@
+num1=parseInt(value)
+num1=parseFloat(value)

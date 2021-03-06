@@ -1,0 +1,23 @@
+    <router-link to="/about">About</router-link>
+
+#tag
+<router-link to="/about" tag="button">About</router-link>
+#可以添加tag标签,如下，即可渲染成按钮
+
+#replace
+<router-link to="/about" tag="button" replace>About</router-link>
+#如果不希望浏览器的前进，后退按钮可用，希望用户点击首页，等页面切换，可以添加这个标签
+
+#active-class
+<router-link to="/about" tag="button" replace active-class="active">About</router-link>
+#可以对处于点击活跃的路由改变样式，颜色，在style下   ｛code1｝   增加个样式即可，。如果需要统一修改，可以在路由里修改。代开路由，index.ts,参见     {code2}
+#code1
+<style lang="scss">
+ .active{ color:'#f00'}
+</style>
+#code2
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
+  linkActiveClass:'active'
+})

@@ -1,0 +1,78 @@
+20201205
+注：这个方案是JDK8的版本，如果你的JDK版本不一样，请参照另外的办法。
+JDK8的版本方案，
+准备工作：
+安装好linux虚拟机，安装好docker
+1，将springboot项目打包，可以点击idea右边的package，得到jar包
+
+2，在桌面新建一个文件夹，把jar包放进去，再新建一个Dockerfile.txt的文本文件
+3，复制下面这段代码到Dockerfile.txt文件中，然后去掉Dockerfile的txt后缀
+FROM java:8
+MAINTAINER lijun
+VOLUME /tmp 
+ADD webConsumer-0.0.1-SNAPSHOT.jar /app.jar 
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+备注：红色是你的jar包名，记得更改，绿色是作者，可改可不改，蓝色也是可改可不改。
+
+4，把jar包和Dockerfile文件传送到linux虚拟机里，目录我用的是home/docker文件夹下。
+5，docker build -t myweb1 .
+然后复制这段命令到linux虚拟机，我在home/docker目录执行的命令，要注意最后面的小点，不要丢了，代表当前目录。红色代表构件的镜像名字，随意取
+6，执行命令成功后，输入docker images 查看镜像是否存在，
+
+docker run -d -p 8081:8080 --name myweb1impl myweb1
+7.打开浏览器，检查是否成功
+
+JDK为其他版本的方案
+1，下载好你的JDK版本，用tar.gz的打包类型
+
+2，把spring项目，dockerfile，jdk文件放到同一个文件夹。
+3，编辑dockerfile，根据自己的情况修改文件名和路径哦~
+# Docker image for springboot file run
+# VERSION 0.0.1
+# Author: hanquan
+
+# 建立一个新的镜像文件，配置模板：新建立的镜像是以centos为基础模板
+# 因为jdk必须运行在操作系统之上
+FROM centos:7
+
+# 作者名  作者邮箱
+MAINTAINER hanquan <15801016967@163.com>
+
+# 创建一个新目录来存储jdk文件
+RUN mkdir /usr/local/java
+
+#将jdk压缩文件复制到镜像中，它将自动解压缩tar文件
+ADD jdk-11.0.3_linux-x64_bin.tar.gz /usr/local/java/
+
+# 创建软连接 ln -s 源文件 目标文件
+RUN ln -s /usr/local/java/jdk-11.0.3 /usr/local/java/jdk
+
+# 设置环境变量
+ENV JAVA_HOME /usr/local/java/jdk-11.0.3
+ENV PATH $JAVA_HOME/bin:$PATH
+
+# VOLUME 指定了临时文件目录为/tmp
+# 其效果是在主机 /var/lib/docker 目录下创建了一个临时文件，并链接到容器的/tmp
+VOLUME /tmp 
+
+# 将jar包添加到容器中并更名为app.jar
+ADD bootstrap-curd-0.0.1-SNAPSHOT.jar /app.jar
+
+# 运行jar包
+RUN bash -c 'touch /app.jar'
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+4，把文件都上传到linux的同一个目录下，如我的是home/docker
+
+5，构件镜像，执行命令
+docker build -t myweb1 .  
+注意后面的小点
+6，构造容器，
+docker run -d -p 8081:8080 --name myweb1impl myweb1
+
+7，docker ps 查看容器是否成功启动
+8，打开浏览器，检查
+
+
+

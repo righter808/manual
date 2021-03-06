@@ -1,0 +1,14 @@
+切换到项目目录
+
+cnpm install uglifyjs-webpack-plugin@1.1.1 --save --dev
+
+打开webpack.config.js
+const UglifyjsWebpackPlugin =require('uglifyjs-webpack-plugin')
+
+plugins:[
+  new UglifyjsWebpackPlugin()
+ ]
+
+
+重新打包即可
+npm run build

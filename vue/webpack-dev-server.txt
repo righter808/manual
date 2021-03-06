@@ -1,0 +1,32 @@
+cnpm install webpack-dev-server@2.9.3 --save-dev
+
+打开webpack.config.js,进行配置
+说明：这里的module，plugins是方便阅读理解，
+
+module.exports = {
+  module: {},
+  plugins:{},
+  devServer:{
+     contentBase:'./dist',
+     inline:true
+              }
+};
+
+
+在package.json里，添加脚本，方便运行，直接运行局部的dev-server
+"script":{
+"test":"";
+"build":"webpack",
+"dev":"webpack-dev-server"
+}
+说明：
+"dev":"webpack-dev-server --open"
+加上--open可以自动打开浏览器
+
+
+执行，
+npm run dev
+
+注意，这是在内存里运行，并没有真正打包，真正打包需要运行
+npm run build
+

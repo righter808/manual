@@ -1,0 +1,59 @@
+思路：
+1,子组件模板触发事件，然后触发子组件函数
+2，子组件函数发射自定义事件
+3，父组件调用子组件，自定义绑定事件，触发父组件的函数
+4，父组件函接收
+
+————html——————
+<div id="app">
+	<child @itemclick="zitemclick"></child>
+</div>
+
+<template id="child">
+   <div>
+   <button type="button" v-for="item in catas"  @click="childitemclick(item)">{{item.name}}</button>
+   </div>
+</template>
+
+说明：子组件模板    系统事件  @click，触发子组件函数  childitemclick(item  )，并传入  item
+          父组件   自定义事件  @itemclick，触发父组件函数  zitemclick，自定义事件模板名称需要与 子组件函数名称一致
+
+——————js——————
+<script>
+var child = {
+  template: '#child',
+  data(){
+    return{
+	   catas:[                             
+       {id:"1",name:"手机"},
+       {id:"2",name:"服装"},
+	   {id:"3",name:"鞋子"},
+	   {id:"4",name:"文具"},
+	   {id:"5",name:"家电"},]
+	}
+  },
+  methods:{
+    childitemclick(item){this.$emit('itemclick',item);}  
+  }
+}
+
+说明：  this.$emit('itemclick',item);  发射自定义名称事件  itemclick 给父组件，并且接收模板传来的item一起传给父组件
+
+new Vue({
+  el: '#app',
+  components: {
+    'child': child
+  },
+  methods:{
+	  zitemclick(item){
+	  console.log(item);
+	  }
+	}
+})
+
+说明：父组件函数zitemclick  接收子组件传来的数据
+
+</script>
+
+
+

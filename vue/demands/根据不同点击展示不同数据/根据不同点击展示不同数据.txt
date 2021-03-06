@@ -1,0 +1,243 @@
+说明:
+譬如,一个页面,有3个标签:流行,新款,,精选,点击不同标签,展示不同的数据
+设计好存储网络数据的模型,然后把所有数据都请求下来,保存到设计好的数据模型中
+在根据电机的标签,展示不同数据,
+因为数据存放在home.vue中,内部子组件监听点击事件标签,然后把事件传递出去给home.vue,home.vue根据点击切换数据
+
+思路:
+1,设计好存储网络数据的模型
+2,把所有数据都请求下来,保存到设计好的数据模型中
+3,组件导入网络请求
+4,用导入的方法发送网络请求,
+5,分割created和methods
+6,把取到的数据保存到设计好的数据模型中
+7,把保存好的数据取出来,展示到不同的组件中
+8,内部子组件设置监听事件和对应方法,监听点击了哪个标签
+9,父组件接收子组件传过来的index,做类型切换
+10,然后设置计算属性,根据类型展示数据
+
+================1,设计好存储网络数据的模型,即放在哪里怎么分类
+#这是组件内部,譬如home.vue
+    data() {
+      return {
+        banners: [],
+        recommends: [],
+        goods: {
+          'pop': {page: 0, list: []},
+          'new': {page: 0, list: []},
+          'sell': {page: 0, list: []},
+        },
+        currentType: 'pop',
+        isShowBackTop: false,
+        tabOffsetTop: 0,
+        isTabFixed: false,
+        saveY: 0
+      }
+
+#用数据模型保存从网络请求的书,这里用的是对象保存
+        goods: {
+          'pop': {page: 0, list: []},
+          'new': {page: 0, list: []},
+          'sell': {page: 0, list: []},
+        },
+
+
+===========2,把所有数据都请求下来,保存到设计好的数据模型中
+#如果网络数据层单独封装,那么切换到网络数据层,譬如src\network\home.js,home.js是用管理网络请求的一层
+
+
+export function getHomeGoods(type, page) {
+  return request({
+    url: '/home/data',
+    params: {
+      type,
+      page
+    }
+  })
+}
+
+
+==============3,组件导入网络请求
+#譬如home.vue
+  import { getHomeMultidata, getHomeGoods } from "network/home"
+
+#如果方法很多,可以换行,譬如
+  import { 
+getHomeMultidata, 
+getHomeGoods,
+getHomeGoods2,
+getHomeGoods3,
+getHomeGoods4
+} from "network/home"
+
+
+================4,用导入的方法发送网络请求
+#home.vue组件
+
+    created() {
+      // 1.请求多个数据
+      this.getHomeMultidata()
+
+      // 2.请求商品数据
+      this.getHomeGoods('pop')
+      this.getHomeGoods('new')
+      this.getHomeGoods('sell')
+    },
+    mounted() {
+      // 1.图片加载完成的事件监听
+      const refresh = debounce(this.$refs.scroll.refresh, 50)
+      this.$bus.$on('itemImageLoad', () => {
+        refresh()
+      })
+    },
+
+#created()表示组件创建好之后执行的脚本,
+# this.getHomeGoods()调用的是methods里的方法,注意要有this
+
+==============5,分割created和methods
+#因为created函数比较特殊,不推荐在里面写复杂的逻辑,所以一般只写个引用,具体的实现写在methods里,然后created,里通过this.getHomeGoods()引用
+
+methods: {
+   getHomeMultidata() {
+        getHomeMultidata().then(res => {
+          this.banners = res.data.banner.list;
+          this.recommends = res.data.recommend.list;
+        })
+      },
+      getHomeGoods(type) {
+        const page = this.goods[type].page + 1
+        getHomeGoods(type, page).then(res => {
+          this.goods[type].list.push(...res.data.list)
+          this.goods[type].page += 1
+
+          // 完成上拉加载更多
+          this.$refs.scroll.finishPullUp()
+        })
+      }
+    }
+  }
+
+
+
+============6,把取到的数据保存到设计好的数据模型中
+#home.vue
+
+      getHomeGoods(type) {
+        const page = this.goods[type].page + 1
+        getHomeGoods(type, page).then(res => {
+          this.goods[type].list.push(...res.data.list)
+          this.goods[type].page += 1
+
+          // 完成上拉加载更多
+          this.$refs.scroll.finishPullUp()
+        })
+      }
+
+#  this.goods[type].list.push(...res.data.list),用push保存起来
+
+
+
+=============7,把保存好的数据取出来,展示到不同的组件中
+#譬如数据都放在了home.vue组件中,home.vue包含goodlist,goodlistitem.vue,他们用来展示数据,所以要把数据从父组件传递给子组件用props传递,然后子组件直接调用即可
+
+#src\components\content\goods\GoodsList.vue
+
+  export default {
+    name: "GoodsListItem",
+    props: {
+      goodsItem: {
+        type: Object,
+        default() {
+          return {}
+        }
+      }
+    },
+//从子组件获取数据并保存
+
+
+<template>
+  <div class="goods-item" @click="itemClick">
+    <img :src="goodsItem.show.img" alt="" @load="imageLoad">
+    <div class="goods-info">
+      <p>{{goodsItem.title}}</p>
+      <span class="price">{{goodsItem.price}}</span>
+      <span class="collect">{{goodsItem.cfav}}</span>
+    </div>
+  </div>
+</template>
+//子组件展示props里获取的数据
+
+
+=========================8,内部子组件设置监听事件和对应方法,监听点击了哪个标签
+#子组件,譬如TabControl.vue
+<div v-for="(item, index) in titles"
+         class="tab-control-item"
+         :class="{active: index === currentIndex}"
+         @click="itemClick(index)">
+      <span>{{item}}</span>
+    </div>
+#设置监听事件itemClick()
+#index是v-for产生的,可以通过这个index知道点击了哪个标签
+---------------
+   data() {
+      return {
+        currentIndex: 0
+      }
+    },
+    methods: {
+      itemClick(index) {
+        this.currentIndex = index;
+        this.$emit('tabClick', index)
+      }
+    }
+# this.$emit('tabClick', index)  把监听到的index点击用emit发送出去给保存数据的组件如home.vue,子传父..父传子用props哦~!
+
+
+
+========================9,父组件接收子组件传过来的index,做类型切换
+#记得导入子组件哦
+     tabClick(index) {
+        switch (index) {
+          case 0:
+            this.currentType = 'pop'
+            break
+          case 1:
+            this.currentType = 'new'
+            break
+          case 2:
+            this.currentType = 'sell'
+            break
+        }
+        this.$refs.tabControl1.currentIndex = index;
+        this.$refs.tabControl2.currentIndex = index;
+      },
+#根据子组件用emit传过来的index对应数据类型
+# this.$refs.tabControl1.currentIndex = index; 解释:
+#这个父组件的->ref=tabControl1的标签的组件->currentIndex=index
+#refs是用来父访问子的,也可以访问自身
+
+
+=========================10,然后设置计算属性,根据类型展示数据
+    computed: {
+      showGoods() {
+        return this.goods[this.currentType].list
+      }
+    },
+
+---------------------------------
+
+    <recommend-view :recommends="recommends"/>
+      <feature-view/>
+      <tab-control :titles="['流行', '新款', '精选']"
+                   @tabClick="tabClick"
+                   ref="tabControl2"/>
+      <good-list :goods="showGoods"/>
+    </scroll>
+#:goods="showGoods"  ,绑定自定义属性,展示计算属性showGoods即可
+
+
+
+
+
+
+

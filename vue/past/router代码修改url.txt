@@ -1,0 +1,5 @@
+this.$router.push('/home')  
+this.$router.replace('/home')  
+#如果不想浏览器有前进后退，用这种方法
+
+

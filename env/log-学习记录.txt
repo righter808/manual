@@ -1,0 +1,59 @@
+vue:uniapp从入门到精通【2020最新版】
+    https://www.bilibili.com/video/BV1CC4y1476y?from=search&seid=10258219930423302930
+
+机器学习:7天学会机器学习与深度学习
+    https://www.bilibili.com/video/BV184411Q7Ng?p=5&spm_id_from=pageDriver
+	7,
+	
+深度学习（卷积网络、循环神经网络、对抗神经网络、Tensorflow实战）	
+	https://www.bilibili.com/video/BV1P4411f7hK?p=6&spm_id_from=pageDriver
+	5,9
+	
+Nodejs + Express 实现多用户博客系统（23 个视频）	
+    https://blog.csdn.net/weixin_39637597/article/details/104414909
+
+太厉害了 已跪！终于有人能把canvas讲的明明白白了	
+    https://www.bilibili.com/video/BV1rV411t7Fr?p=4
+	4
+
+
+-----------------------------预备课程--------------------------------
+
+
+Python:爬虫基础5天速成（2021全新合集）Python入门+数据可视化
+    https://www.bilibili.com/video/BV12E411A7ZQ?p=2	
+	
+	
+-----------------------------已毕业课程	-----------------------------
+经典nodejs教程（快速上手node+MongoDB+API+快速node项目搭建，学会M	
+	https://www.bilibili.com/video/BV1Bp4y1k71q
+	15中部,完结
+
+VUE:2019年最全最新Vue、Vuejs教程，从入门到精通
+    https://www.bilibili.com/video/BV15741177Eh?p=180
+    进程:163  166  171  176  179  188  195,200,206,212,213,215,220,完毕
+	问题:动态路由需要回顾
+	总结:vue的minin,vuex还需要多练习,还有promise,axios,插槽,现在只是知道有这么个东西,用的不熟练
+
+node:尚硅谷超经典NodeJS-node.js实战教程全套完整版(初学者零基础入门)
+    https://www.bilibili.com/video/BV1bs411E7pD?p=13&spm_id_from=pageDriver
+	开始时间:20210203 
+	进程:13  完结
+	总结:课程内容较少,而且偏简单,对fs文件系统做了总结
+
+node:Node.JS-黑马程序员
+    https://www.bilibili.com/video/BV1Ns411N7HU
+	开始时间:20210204
+	进程:26,31一半,55,60,65,80,82,94,109,完毕
+
+node:Node图书管理系统项目-黑马程序员37期
+    https://www.bilibili.com/video/BV1LE41187Q3	
+    11,23,完结
+
+node:elementUi+vue+node+express+mongodb简易学生成绩管理系统
+     https://www.bilibili.com/video/BV1SZ4y1s7xE	
+	 完结
+	 
+node:使用Node.js express框架为《抽奖吧》微信小程序提供API接口开发
+    https://www.bilibili.com/video/BV11J411y7JE?from=search&seid=3437976328223691527
+	完结

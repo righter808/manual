@@ -1,0 +1,13 @@
+文件：src\components\user.vue
+
+当前哪个路由处于活跃状态，拿到的就是哪个路由数据
+<script lang="ts">
+export default  {
+name:"user",
+computed:{
+   userID(){
+ return this.$route.params.userID
+}}}
+</script>
+#对应关系：{文件user.vue}.{this.$route.params.userID}.{userID}=>
+{文件src\router\index.ts}.{path: '/user/:userID',name: 'user',component: user }.{userID}

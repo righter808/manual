@@ -1,0 +1,9 @@
+border-style: solid dotted dashed double;    上右下左  实线/点虚线/线虚线/实线   还有一个none,无
+border-top-width: 15px;
+border-right-width: 5px;
+border-bottom-width: 15px;
+border-left-width: 5px;
+
+
+border-style: solid dotted dashed double;   上右下左  实线/点虚线/线虚线/实线   还有一个none,无
+border-width: 15px 5px 15px 5px;   上右下左

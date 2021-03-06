@@ -1,0 +1,8 @@
+目录下新建一个js文件，hellonode.js
+文件内容
+
+console.log("Hello!Node!")
+
+文件目录下打开cmd
+执行hellonode.js
+node hello

@@ -1,0 +1,5 @@
+    <a href="https://act.mogujie.com/zzlx67">
+      <img src="~assets/img/home/recommend_bg.jpg" alt="">
+    </a>
+
+#显示图片,并且可以指向连接

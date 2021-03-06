@@ -1,0 +1,40 @@
+http://c.biancheng.net/view/2011.html
+
+
+1,安装爬虫框架
+2,新建py文件并导入爬虫框架
+3,使用爬虫框架爬取数据
+4,把数据保存到数据库中
+
+===========================1,安装爬虫框架
+pip list 或者pip3 list 查看是否有如下框架包,如果有则不需要安装,直接引入即可
+爬虫框架
+requests  
+bs4  
+scpay(注意不是scrapy)
+
+===========================2,新建py文件并导入爬虫框架
+#a.py
+import requests 
+from bs4 import    BeautifulSoup
+#还有其他需要导入的框架,根据需要
+
+===========================3,使用爬虫框架爬取数据
+import requests      
+url = 'http://www.cntour.cn/'
+strhtml = requests.get(url)        
+print(strhtml.text)
+
+
+import requests        
+from bs4 import    BeautifulSoup
+url='http://www.cntour.cn/'
+strhtml=requests.get(url)
+soup=BeautifulSoup(strhtml.text,'lxml')
+data = soup.select('#main>div>div.mtop.firstMod.clearfix>div.centerBox>ul.newsList>li>a')
+print(data)
+
+
+===========================
+===========================
+===========================

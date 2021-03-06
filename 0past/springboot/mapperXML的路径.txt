@@ -1,0 +1,3 @@
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+//mapper的包扫描

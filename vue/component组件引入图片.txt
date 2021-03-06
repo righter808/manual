@@ -1,0 +1,19 @@
+<template>
+  <div id="tabbar">
+  <img src="@/assets/img/tabbar/home.svg">
+  </div>
+</template>
+
+<script>
+import Tabbar from '@/components/tabbar/tabbar'
+export default {
+  name: 'App',
+  components:{tabbar}
+}
+</script>
+
+
+<style>
+@import "@/assets/css/base.css"
+</style>
+

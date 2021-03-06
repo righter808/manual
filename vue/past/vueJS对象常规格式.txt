@@ -1,0 +1,24 @@
+new Vue({
+  el: "#app",
+  data: {
+    message: "好神奇!",
+      info:"我艹"
+  },
+  methods:{
+    gorun:function(){
+     console.log();
+                    },
+    runto:function(){
+     console.log(); 
+                    },
+					
+	serchmusci:function(){			
+	   var that=this;
+       axios
+         .get('https://www.runoob.com/try/ajax/json_demo.json?id='+this.query)
+         .then(function(response){console.log();})
+         .catch(function (error) { // 请求失败处理
+         console.log(error);
+                                 });					
+          }
+          })

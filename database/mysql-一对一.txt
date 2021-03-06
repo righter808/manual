@@ -1,0 +1,17 @@
+一张身份证对应一个人,
+一定要保证外键的字段是唯一的 unique
+
+
+create table card(
+id int primary key auto_increment,
+phone char(18) not null,
+name char(20) not null
+);
+
+
+create table people(
+id int primary key auto_increment, #primary主键
+name varchar(20) not null,
+c_id int unique, # unique字段唯一
+foreign key(c_id) references card(id) # 外键字段一定要保证unique
+);

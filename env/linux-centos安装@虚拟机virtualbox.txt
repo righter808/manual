@@ -1,0 +1,7 @@
+https://www.cnblogs.com/gaomanito/p/11460381.html
+
+1,下载并安装好virtualbox
+2,下载好centos
+3,配置centos虚拟机
+4,安装
+5,配置系统

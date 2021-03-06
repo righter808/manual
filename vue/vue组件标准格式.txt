@@ -1,0 +1,18 @@
+<template>
+  <div></div>
+</template>
+
+<script>
+export default {
+  name: 'tabbar'
+}
+</script>
+
+<style scoped>
+</style>
+
+
+#name:tabbar,名字根据文件名修改
+#<template>填写div模板,注意,只能有1个根div,不能同时有2个根div,根div里可以嵌套div
+#<script>,写脚本文件
+#<style>写组件样式

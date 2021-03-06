@@ -1,0 +1,5 @@
+  {
+    path: '/user/userID',
+    name: 'user',
+    component: user
+  },

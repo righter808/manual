@@ -1,0 +1,16 @@
+安装vue-loader
+cnpm install --save-dev vue-loader vue-template-compiler
+
+2，在配置文件里配置vue loader  ，注意去掉重复的module.exports = {}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        use: ["vue-loader"]
+      },
+    ],
+  },
+};
+
+注：如果报错，可能是大于14.00的版本需要安装一个插件，如果不想安装插件，在json里把版本号改低

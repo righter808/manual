@@ -1,0 +1,35 @@
+1，实例化化vue
+——————js————
+new Vue({
+  el: '#app'
+})
+————html————
+<div id="app">
+	<runoob></runoob>
+</div>
+
+2，创建组件
+————js————
+const cpnc=Vue.extend(
+ {
+   template: 
+     '<div><h1>自定义组件!</h1></div>'
+ }
+)
+说明：js里加入这段代码， 表示创建了这个组件
+
+3，注册组件
+————js————
+Vue.component('runoob', cpnc)
+说明：
+'runoob' 表示div里的名称，cpnc代表要使用的组件
+这个是注册的全局组件，注册为局部组件请查阅，注册局部组件文档
+
+
+4，使用组件
+————html————
+<div id="app">
+	<runoob></runoob>
+</div>
+
+说明：div app里加入<runoob></runoob> 就代表使用了这个组件

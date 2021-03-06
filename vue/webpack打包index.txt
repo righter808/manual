@@ -1,0 +1,16 @@
+把index打包到dist目录需要一个插件
+切换到项目目录下，执行下面的命令
+cnpm install html-webpack-plugin --save -dev
+
+
+进入webpack.config.js
+
+添加：
+const HtmlWebpackPlugin =require('html-webpack-plugin')
+
+plugins:[
+   new HtmlWebpackPlugin(
+         template:'index.html'  
+                                          )
+
+]

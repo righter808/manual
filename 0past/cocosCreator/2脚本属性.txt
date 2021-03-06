@@ -1,0 +1,71 @@
+  properties: {
+      height: 20,       // number
+      type: "actor",    // string
+      loaded: false,    // boolean
+      target: null,     // object  当声明的属性为基本 JavaScript 类型时，可以直接赋予默认值：
+	  
+	  target: cc.Node,
+      pos: cc.Vec2,    
+	  //当声明的属性具备类型时（如：cc.Node，cc.Vec2 等），可以在声明处填写它们的构造函数来完成声明，
+	  
+      pos: new cc.Vec2(10, 20),
+      color: new cc.Color(255, 255, 255, 128),  
+	  //当声明属性的类型继承自 cc.ValueType 时
+	  //（如：cc.Vec2，cc.Color 或 cc.Rect），除了上面的构造函数，还可以直接使用实例作为默认值：
+	  
+	  any: [],      // 不定义具体类型的数组  
+      bools: [cc.Boolean],
+      strings: [cc.String],
+      floats: [cc.Float],
+      ints: [cc.Integer],
+
+      values: [cc.Vec2],
+      nodes: [cc.Node],
+      frames: [cc.SpriteFrame],
+	  //当声明属性是一个数组时，可以在声明处填写它们的类型或构造函数来完成声明，如：
+	  
+  }
+======================================================== 完整声明
+#有些情况下，我们需要为属性声明添加参数，这些参数控制了属性在 属性检查器 中的显示方式，
+以及属性在场景序列化过程中的行为。例如：
+  properties: {
+    score: {
+        default: 0,
+        displayName: "Score (player)",
+        tooltip: "The score of player",
+    }
+}
+
+========================================================数组声明
+数组的 default 必须设置为 []，如果要在 属性检查器 中编辑，还
+需要设置 type 为构造函数，枚举，或者 cc.Integer，cc.Float，cc.Boolean 和 cc.String。
+
+properties: {
+    names: {
+        default: [],
+        type: [cc.String]   // 用 type 指定数组的每个元素都是字符串类型
+    },
+
+    enemies: {
+        default: [],
+        type: [cc.Node]     // type 同样写成数组，提高代码可读性
+    },
+}
+
+
+========================================================get/set 声明
+在属性中设置了 get 或 set 以后，访问属性的时候，就能触发预定义的 get 或 set 方法。定义方法如下：
+
+properties: {
+    width: {
+        get: function () {
+            return this._width;
+        },
+        set: function (value) {
+            this._width = value;
+        }
+    }
+}
+如果你只定义 get 方法，那相当于属性只读。
+
+conmon:f

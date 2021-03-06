@@ -1,0 +1,10 @@
+$.post(
+     "/try/ajax/demo_test_post",    //请求地址
+
+     data:{     //发送的数据
+        "name":$("#username".val())
+        age:"13"},
+ 
+     success:function(data){   //服务器响应的数据，并传入函数进行处理
+        alert("数据: \n" + data + "\n状态: " + status);
+    })

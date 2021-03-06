@@ -1,0 +1,11 @@
+https://blog.csdn.net/weixin_44220680/article/details/92769174
+
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+直接打开dos,输入上面命令即可
+
+npm config get registry
+完成后,输入命令,可验证是否设置成功,
+如果返回https://registry.npm.taobao.org 则说明成功了
+
+以后下载东西就用
+cnpm install XXXXX

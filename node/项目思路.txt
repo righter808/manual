@@ -1,0 +1,22 @@
+===============服务器渲染的项目步骤
+1,安装模块
+	安装express
+	安装nodemon(可选)
+	安装post处理插件body-parser
+	安装arttemplate
+2,布置架构
+	app.js    //入口文件
+	router   
+	service
+	  entity实体类
+	  add  
+	     1,模板引擎页面标签定义添加路径,如/add
+		 2,router定义跳转到具体的方法,并渲染页面
+		 3,service定义方法
+	  delete
+	  change
+	  search
+	views
+	  
+
+

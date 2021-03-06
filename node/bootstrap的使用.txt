@@ -1,0 +1,8 @@
+1,安装
+2,引用
+3,使用
+
+
+项目dos
+cnpm intsall --save bootstrap
+就会下载到项目目录下的node_modules里面,同时,package.json会注册依赖

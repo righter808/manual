@@ -1,0 +1,118 @@
+#src\components\common\scroll\Scroll.vue
+#src\views\home\Home.vue
+
+1,监听上拉事件,用scroll
+2.有的v组件不需要上拉加载更多,设置一个属性,默认不需要上拉
+3,第二部之后,如果home.vue需要监听,就需要传1个props属性给scroll组件
+4,home.vue接收上拉事件绑定loadmore方法
+5,home.vue定义loadmore方法
+
+=============================================
+#src\components\common\scroll\Scroll.vue
+ <template>
+  <div class="wrapper" ref="wrapper">
+    <div class="content">
+      <slot></slot>
+    </div>
+  </div>
+</template>
+
+<script>
+  import BScroll from 'better-scroll'
+
+  export default {
+    name: "Scroll",
+    props: {
+      probeType: {
+        type: Number,
+        default: 0
+      },
+//------------2.有的v组件不需要上拉加载更多,设置一个属性,默认不需要拉-----------------//
+      pullUpLoad: {    
+        type: Boolean,
+        default: false
+      }
+    },
+//------------2.有的v组件不需要上拉加载更多,设置一个属性,默认不需要拉-----------------//
+    data() {
+      return {
+        scroll: null,
+        message: '哈哈哈'
+      }
+    },
+    mounted() {
+      // 1.创建BScroll对象
+      this.scroll = new BScroll(this.$refs.wrapper, {
+        click: true,
+        probeType: this.probeType,
+        pullUpLoad: this.pullUpLoad
+      })
+
+      // 2.监听滚动的位置
+      this.scroll.on('scroll', (position) => {
+        // console.log(position);
+        this.$emit('scroll', position)
+      })
+//---------------------------1,监听上拉事件,用scroll---------------------------//
+      // 3.监听上拉事件       
+      this.scroll.on('pullingUp', () => {
+        this.$emit('pullingUp')
+      })
+    },
+//this.$emit('pullingUp') 把上拉事件发出去,传给home.vue,
+//---------------------------1,监听上拉事件,用scroll---------------------------//
+    methods: {
+      scrollTo(x, y, time=300) {
+        this.scroll.scrollTo(x, y, time)
+      },
+      finishPullUp() {
+        this.scroll.finishPullUp()
+      }
+    }
+  }
+</script>
+
+<style scoped>
+
+</style>
+
+==========================================3,第二部之后,如果父组件需要监听,就需要传1个props属性给scroll组件
+#src\views\home\Home.vue
+
+template>
+  <div id="home" class="wrapper">
+    <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+    <scroll class="content"
+            ref="scroll"
+            :probe-type="3"
+            @scroll="contentScroll"
+//---------------------------3.keycode---------------------------//
+            :pull-up-load="true"
+//这里开启的是驼峰命名,pull-up-load和子组件的pullUpLoad对应//
+//---------------------------3.keycode---------------------------//
+
+===============================================4,home.vue接收上拉事件绑定loadmore方法
+//---------------------------4.keycode---------------------------//
+            @pullingUp="loadMore">
+//接收scroll.vue传来的事件,然后绑定loadmore方法
+//---------------------------4.keycode---------------------------//
+      <home-swiper :banners="banners"/>
+      <recommend-view :recommends="recommends"/>
+      <feature-view/>
+      <tab-control class="tab-control"
+                   :titles="['流行', '新款', '精选']"
+                   @tabClick="tabClick"/>
+      <good-list :goods="showGoods"/>
+    </scroll>
+    <div>呵呵呵呵</div>
+    <back-top @click.native="backClick" v-show="isShowBackTop"/>
+  </div>
+</template>
+
+==================================5,home.vue定义loadmore方法
+
+    loadMore() {
+        this.getHomeGoods(this.currentType)
+      },
+
+#根据不同商品,上拉加载不同

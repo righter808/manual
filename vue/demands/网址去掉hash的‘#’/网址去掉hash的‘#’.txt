@@ -1,0 +1,14 @@
+原代码
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+})
+
+尚未测试的代码
+
+const router = createRouter({
+    routes,
+    mode:'history'
+})
+
+教程说添加一个mode：history

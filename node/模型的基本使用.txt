@@ -1,0 +1,71 @@
+1,定义模型
+2,导出方法
+3,控制器导入,并调用模型
+
+附:
+crud基本格式
+分页查询
+
+-----------------1,定义模型
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://192.168.0.109:27017/test', {useNewUrlParser: true, useUnifiedTopology: true});
+
+const { Schema } = mongoose;
+const uuu = new Schema({
+  username: String,
+  password: String,
+  email: String
+
+});
+  
+var yy= mongoose.model('bbbb', uuu)
+
+const createmodel=(postdate)=>{
+	 const admin=new yy(postdate)
+	 #postdate 是req传入的参数
+	 #new yy(postdate)根据传入参数生成一个模型数据
+	 #postdate  ,一定要满足约束条件,否则无法插入数据!切记!
+     return admin.save(function (err, ret) {
+		  if (err) {
+			console.log('保存失败')
+		  } else {
+			console.log('保存成功')
+			console.log(ret)
+		  }})}
+
+
+
+-----------------2,导出方法
+module.exports={
+	createmodel
+}
+
+
+=====================crud基本格式
+#增
+const createmodule=postdate=>{
+     const admin=new yy(postdate)
+	 console.log(  "admin打印:"+admin)
+	 return admin.save(function (err, ret) {
+		  if (err) {
+			console.log('保存失败')
+		  } else {
+			console.log('保存成功')
+			console.log(ret)
+		  }})}
+	
+#查	
+const findhaha=()=>{
+	 return yy.find(function (err, ret) {
+		  if (err) {
+			console.log('保存失败')
+		  } else {
+			console.log('保存成功')
+			console.log(ret)
+		  }})}		  
+
+#分页查询		  
+const findhaha=(skipnum,limitnum)=>{
+	 return yy.find().skip(skipnum).limit(limitnum).then(res=>{return res}).catch(err=>{console.log(  "查询失败"+err)
+	 return []})}	
+#skipnum,limitnum,注意传过来的数据类型必须是number类型,别搞成字符串了

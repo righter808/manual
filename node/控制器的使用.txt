@@ -1,0 +1,70 @@
+前提,必须已经定义好router
+
+1,导入模型
+2,定义控制器方法,调用模型
+3,导出控制器方法给路由
+4,路由导入控制器,并调用控制器方法
+
+附加:
+crud
+分页查询
+
+---------------------------------1,导入模型
+const model=require("../db.js")
+---------------------------------2,定义控制器,调用模型
+const create =(req,res)=>{
+    //1,接收数据
+	let postdata=req.body
+	//2,过滤数据
+	//3,操作数据库
+	let rs=await createmodule(postdata)
+	//4,判断返回
+	if (rs){
+	  res.send("123")
+	}
+}
+
+const create2 =(req,res)=>{
+	res.send("i success!")
+}
+
+---------------------------------3,导出方法给路由
+module.exports={
+	create
+}
+
+---------------------------------4,路由导入控制器方法
+const dbcontroller= require("./controller/aacon.js")
+
+=========================附加
+#接收post请求,根据post请求创建模型并保存
+const create =(req,res)=>{
+    //1,接收数据
+	let postdata=req.body
+	//2,过滤数据
+	//3,操作数据库
+	let rs=await createmodule(postdata)
+	//4,判断返回
+	if (rs){
+	  res.send("123")
+	}
+}
+
+
+#接收get请求,查询模型,并返回数据
+const haha =async (req,res)=>{
+	let hahares=await model.findhaha()
+	res.send(hahares)
+}
+
+
+#分页查询
+const haha =async (req,res)=>{
+    //1,接收查询数据参数
+    let getdate=req.query
+    //2,过滤数据
+    let skip=(parseInt(getdate.pageno)-1)*parseInt(getdate.pagesize)
+	//3,获取数据	
+	let hahares=await model.findhaha(skip,parseInt(getdate.pagesize))
+	res.send(hahares)
+}

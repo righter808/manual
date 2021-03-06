@@ -1,0 +1,36 @@
+安装增强工具即可
+
+1,点击,系统窗口菜单栏-设备-安装增强功能
+
+#执行步骤1,出现   错误1:未能加载虚拟光盘
+
+2,桌面会出现多一个文件vbox-gas的文件,点击运行,即开始安装增强功能
+
+3,安装完成后,点击
+视图-全屏模式,即可
+按 
+键盘右边的ctrl+鼠标右键,切换
+
+
+
+
+
+
+
+===================================错误1:未能加载虚拟光盘
+未能加载虚拟光盘 C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso 到虚拟电脑 centosenv.
+Could not mount the media/drive 'C:\Program Files\Oracle\VirtualBox/VBoxGuestAdditions.iso' (VERR_PDM_MEDIA_LOCKED).
+返回 代码: E_FAIL (0x80004005)
+组件: ConsoleWrap
+界面: IConsole {872da645-4a9b-1727-bee2-5585105b9eed}
+被召者: IMachine {85632c68-b5bb-4316-a900-5eb28d3413df}
+
+解决方案1
+https://blog.csdn.net/binbinxyz/article/details/42785849
+结果:不行
+
+解决方案2:
+https://jingyan.baidu.com/article/84b4f565579a7660f6da32b5.html
+结果:可行
+
+

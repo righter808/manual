@@ -1,0 +1,38 @@
+
+sudo docker ps -a
+#查看mysql容器,显示所有的容器，包括未运行的。
+
+systemctl enable docker
+把docker设置为开机启动
+
+systemctl list-unit-files | grep "服务名"
+查看某服务是否开机启动
+
+sudo docker ps
+#查看在运行的容器,
+
+sudo docker images -a
+#列出本地所有的镜像
+
+docker rm 容器ID
+#删除容器
+
+docker attach 容器ID
+#进入容器
+,这种方式不推荐使用
+
+docker exec -it 容器ID /bin/bash
+#进入容器
+
+systemctl start docker
+启动docker
+#centos7
+
+systemctl restart  docker
+关闭docker
+centos7
+
+systemctl restart  docker
+重启docker
+
+

@@ -1,0 +1,17 @@
+引用地址：
+https://webpack.js.org/loaders/less-loader/
+
+安装loader
+$ cnpm install less less-loader --save-dev
+
+配置文件加入下面代码，注意去掉module.export
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        loader: "less-loader", // compiles Less to CSS
+      },
+    ],
+  },
+};

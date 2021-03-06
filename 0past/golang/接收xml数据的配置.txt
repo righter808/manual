@@ -1,0 +1,3 @@
+copyrequestbody = true
+
+在golang配置文件里加上这个配置

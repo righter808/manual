@@ -1,0 +1,19 @@
+可以实现点击不同路由，浏览器顶部根据路由显示标题
+打开src\router\index.ts
+
+新增代码
+router.beforeEach(to,from,next)=>{
+document.title=to.matched[0].meta.tittle
+next()
+}
+#statement:这段代码直接加进去，
+
+{
+    path: 'news',
+    component: HomeNews,
+    meta:{
+                tittle:'首页'
+             }
+     }
+
+#statement:新增meta参数，这段代码是插入到每一个路由里面，根据不同路由更改名称

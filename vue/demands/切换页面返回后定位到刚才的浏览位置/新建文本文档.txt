@@ -1,0 +1,68 @@
+1,让组件不要销毁
+2,使组件中的内容保持原来位置
+离开时,保存一个位置信息,
+进来时,将位置信息设置为原来的信息
+3,scroll里定义getScrollY()
+
+
+#App.vue
+
+=================1,让组件不要销毁
+#App.vue
+
+<template>
+  <div id="app" class="wrapper">
+    <keep-alive exclude="Detail">
+      <router-view/>
+    </keep-alive>
+    <main-tab-bar/>
+  </div>
+</template>
+#用    <keep-alive exclude="Detail">包裹,让组件加载后不要销毁
+
+===================================2,使组件中的内容保持原来位置
+离开时,保存一个位置信息,
+进来时,将位置信息设置为原来的信息
+#views\home\Home.vue
+   data() {
+      return {
+        banners: [],
+        recommends: [],
+        goods: {
+          'pop': {page: 0, list: []},
+          'new': {page: 0, list: []},
+          'sell': {page: 0, list: []},
+        },
+        currentType: 'pop',
+        isShowBackTop: false,
+        tabOffsetTop: 0,
+        isTabFixed: false,
+        saveY: 0
+      }
+#设置一个saveY用来保存位置信息
+-------------------------
+    activated() {
+      this.$refs.scroll.scrollTo(0, this.saveY, 0)
+      this.$refs.scroll.refresh()
+    },
+    deactivated() {
+      this.saveY = this.$refs.scroll.getScrollY()
+    },
+
+
+=================================3,scroll里定义getScrollY()
+#components\common\scroll\Scroll.vue
+    methods: {
+      scrollTo(x, y, time=300) {
+        this.scroll && this.scroll.scrollTo(x, y, time)
+      },
+      refresh() {
+        this.scroll && this.scroll.refresh()
+      },
+      finishPullUp() {
+        this.scroll && this.scroll.finishPullUp()
+      },
+      getScrollY() {
+        return this.scroll ? this.scroll.y : 0
+      }
+    }

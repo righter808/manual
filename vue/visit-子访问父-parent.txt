@@ -1,0 +1,50 @@
+this.$parent
+
+子组件使用这个即可访问父组件的属性和方法，但不推荐使用，会提高程序的耦合度
+
+<div id="app">
+	<runoob ref="com1"></runoob>
+</div>
+
+<template id="Child">
+   <button type="button"  @click="childa">按钮</button>
+</template>
+
+<script>
+var Child = {
+  template: '#Child',
+  data(){
+	return{
+	  counter:'1',
+	  message:'haha'
+	}
+		},
+  methods:{
+    childa(){console.log(this.$parent.fatherb)}
+          },
+  props:{
+      cadd:{
+	   type:Array,
+	   default(){return []},
+	   required:true
+	       },
+		}
+}
+
+new Vue({
+  el: '#app',
+  components: {
+    'runoob': Child
+  },
+  data:{
+     fatherb:'hello!'
+        },
+  methods:{
+    btnclick(){
+	           <!-- this.$children[0].childa(); 这种访问方式很少-->
+			   console.log(this.$refs.com1.counter);
+	          }
+	      },
+})
+
+</script>

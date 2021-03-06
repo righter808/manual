@@ -1,0 +1,6 @@
+INSERT INTO tabale
+(title, author)
+VALUES
+("学习 PHP", "菜鸟教程");
+
+INSERT INTO tabale (name) VALUES ("学习 PHP");

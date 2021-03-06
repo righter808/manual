@@ -1,0 +1,26 @@
+方法1：
+<script type="text/x-template" id="Child">
+  <div><h1>自定义组件!</h1>
+  <h2>333</h2></div>
+</script>
+
+Vue.component('runoob', {
+  template: '#Child'
+})
+
+说明：定义好模板，加上ID，然后在组件里直接调用模板ID
+
+
+
+方法2：
+<template id="Child">
+   <div><h1>自定义组件!</h1>
+  <h2>333</h2></div>
+</template>
+
+Vue.component('runoob', {
+  template: '#Child'
+})
+
+说明：定义好模板，加上ID，然后在组件里直接调用模板ID
+

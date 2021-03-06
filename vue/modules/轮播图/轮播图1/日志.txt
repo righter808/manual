@@ -1,0 +1,37 @@
+20210130-0934
+这个从vue学习里直接copy来的模块,老师地址
+https://www.bilibili.com/video/BV15741177Eh?p=156
+
+===========结构解析:
+swiper.vue是大轮播图
+swiperitem.vue是大轮播图里的轮播图
+index.js是把2个vue合并了的导出文件
+
+=============使用方法
+1,copy到要使用的项目中,推荐划分好目录结构,譬如src\components\common
+2,需要调用的vue组件导入index.js,并注册2个组件
+3,使用swiper
+
+
+====1,copy到要使用的项目中,推荐划分好目录结构,譬如src\components\common
+
+  import HomeSwiper from './childComps/HomeSwiper'
+
+
+========2,需要调用的vue组件导入index.js,并注册2个组件
+components: {
+      HomeSwiper,
+      RecommendView,
+      FeatureView,
+      NavBar,
+      TabControl,
+      GoodList,
+      Scroll,
+      BackTop
+    },
+
+
+====3,使用swiper
+
+<home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad"/>
+

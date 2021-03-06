@@ -1,0 +1,125 @@
+引用:https://zhuanlan.zhihu.com/p/24357762
+
+思路:Vuex 就是前端为了方便数据的操作而建立的一个” 前端数据库“
+步骤:
+1,安装vuex
+2,导入vuex
+3,配置vuex,设计好数据结构
+4,main.js配置vuex
+5,组件里取出vuex存储的数据
+#src/store/index.js
+#src/main.js
+#src/views/Homepage.vue
+
+bug留言板:
+---------------------------------------------------------------------------------
+时间         debug记录     bug简要
+
+
+---------------------------------------------------------------------------------
+
+参数表:
+
+步骤拆分:
+=================================================================================1,安装vuex
+项目dos
+cnpm install vuex --save
+=================================================================================2,导入vuex
+src下新建store目录和store.js文件
+#src/store/index.js
+#导入vuex
+import Vue from 'vue';
+import Vuex from 'vuex';
+=================================================================================3,使用vuex
+Vue.use(Vuex);  //使用vuex
+//创建vuex对象
+let store = new Vuex.Store({
+    // 1. state
+    state:{
+        city:"城市名"
+    },
+
+    // // 2. getters
+    getters:{
+        // 参数列表state指的是state数据
+        getCityFn(state){
+            return state.city;
+        }
+    },
+    // 3. actions
+    // 通常跟api接口打交道
+    actions:{
+        // 设置城市信息
+        // 参数列表：{commit, state}
+        // state指的是state数据
+        // commit调用mutations的方法 
+        // name就是调用此方法时要传的参数
+        setCityName({commit,state}, name){
+            // 跟后台打交道
+            // 调用mutaions里面的方法
+            commit("setCity", name);
+        }
+    },
+    // 4. mutations
+    mutations:{
+        // state指的是state的数据
+        // name传递过来的数据
+        setCity(state, name){
+            state.city = name;//将传参设置给state的city
+        }
+    }
+});
+
+//导出vuex对象,组件好挂载
+export default store;
+=================================================================================4,main.js配置vuex
+#src/main.js
+import Vue from 'vue'
+import App from './App'
+import store from './store'       //引入封装好的vuex
+
+Vue.config.productionTip = false
+App.mpType = 'app'
+const app = new Vue({
+	store, 			  //引入vuex,注意这里	  
+    ...App
+})
+app.$mount()
+
+
+=================================================================================5,组件里取出vuex存储的数据
+#src/views/Homepage.vue
+<template>
+    <div class="home">
+        <h1>{{city}}</h1>
+        <!-- 按钮导航 -->
+        <router-link tag='button' to="/citylist">获取城市列表</router-link>
+    </div>
+</template>
+<script>
+export default {
+  data () {
+    return {
+    }
+  },
+  computed:{
+    city:function() {
+      // 通过vuex的getters方法来获取state里面的数据
+      return this.$store.getters.getCityFn;
+    }
+  }
+}
+</script>
+#{{city}}这里是计算属性=={{this.$store.getters.getCityFn;}},表示从vuex中取数据
+
+
+留言拆分:
+*********************************************************************************
+*********************************************************************************
+*********************************************************************************
+*********************************************************************************
+
+
+
+
+

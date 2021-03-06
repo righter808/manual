@@ -1,0 +1,89 @@
+1,注册一个github账号
+  #网页版本的创建等操作就不说明了
+  
+2,使用git管理github
+3,设置git
+4,打开需要设置git同步的文件夹,开始同步
+
+
+git checkout master
+切换分支,master分支,要变为main分支git checkout main
+
+git status
+查看分支信息
+
+git branch -a
+查看本地和远程的分支
+
+git branch 分支名
+新建分支
+
+git fetch <远程主机名>
+远程主机的更新全部取回本地
+
+git fetch origin main
+取回origin 主机的master 分支：
+
+git branch -d <branchname>
+删除本地分支
+
+git push origin --delete master
+删除远程的master分支
+
+git fetch <远程主机名> <分支名>
+取回特定分支的更新，可以指定分支名
+
+================2,使用git管理github
+下载安装git
+
+如果点击鼠标右键有
+git gui here
+git bash here 代表安装成功
+
+# git config命令的–global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
+ 
+# 1.查看git配置信息
+git config --list
+ 
+ 
+# 2.查看git用户名、密码、邮箱的配置
+git config user.name
+git config user.password
+git config user.email
+ 
+ 
+# 3.设置git用户名、密码、邮箱的配置
+$ git config user.name "freedom"
+$ git config user.password "123456"
+$ git config user.email "1548429568@qq.com"
+# 3.设置git用户名、密码、邮箱的配置（全局配置）
+git config --global user.name righter808
+$ git config --global user.name freedom
+$ git config --global user.password 密码
+git config --global user.password ljdhome819
+$ git config --global user.password 邮箱
+git config --global user.email "righter808@gmail.com"
+ 
+ 
+# 4.修改git用户名、密码、邮箱的配置（跟设置语法一样，没有用户名就添加，有了用户名就修改）
+$ git config user.name "freedom"
+# 4.修改git用户名、密码、邮箱的配置（全局配置）
+$ git config --global user.name "freedom"
+ 
+ 
+# 5.删除git用户名、密码、邮箱的配置
+
+git status
+git add  文件名
+git commit 文件名 -m 描述
+#-m 代表描述
+
+
+==============4,打开需要设置git同步的文件夹,开始同步
+鼠标右键,点击git bash here
+
+git init
+设置后,会显示一个.git的隐藏文件
+
+
+git clone https://github.com/righter808/manual.git 从服务器上将代码给拉下来

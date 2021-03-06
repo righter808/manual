@@ -1,0 +1,42 @@
+前提,接口已经写好,并且接收json,密切注意contentType的格式,这里很容易出问题
+
+===================增
+1,建立表单
+2,数据绑定
+3,提交数据
+
+
+1,建立表单
+<div class="c1">
+    <input type="text" v-model="formLabelAlign.username">
+	<input type="text" v-model="formLabelAlign.password">
+	<input type="text" v-model="formLabelAlign.email">
+    <button type="submit" @click="sub">提交</button>
+</div>
+#v-model="formLabelAlign.email" 这里是双向绑定到data里的formLabelAlign对象的email属性,
+#@click="sub" 绑定提交表单的方法
+
+
+2,数据绑定
+    data() {
+      return {        
+        resu: '',
+		labelPosition: 'left',
+		formLabelAlign: {
+		  username: '',
+		  password: '',
+		  email: ''
+		}
+    }},
+#formLabelAlign,设立对象,用来接收表单的数据
+
+
+3,提交数据
+	  sub(){
+                 axios({url:'http://localhost:3000/stu',
+				 //提交数据的接口api
+				 method:'post',
+				 //提交方式,注意要和服务器的提交方式吻合
+				 data: this.formLabelAlign
+				 //提交的数据,this.formLabelAlign
+			})} 

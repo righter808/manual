@@ -1,0 +1,19 @@
+通用配置
+server:
+   port:8080
+server:
+  servlet:
+    context-path: /student   //项目访问路径配置，默认是/，配置后就会变为/student
+
+
+
+
+其他配置请分别调取各个组件的配置
+druid
+thymeleaf
+dubbo
+zookeeper
+redis
+rabitMQ
+JPA
+elasticsearch

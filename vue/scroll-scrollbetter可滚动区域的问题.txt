@@ -1,0 +1,95 @@
+scroll可滚动区域是根据,scroll.height决定的
+scroll.height根据放在betterscroll中的内容决定的
+但是在刚开始计算高度是并没有把图片计算在内
+图片加载进来后,scrollheight并没有更新
+所以滚动会出现bug
+监听每一张图片是否加载完成.然后重新计算高度即可
+
+#components\content\goods\GoodsListItem.vue
+#views\home\Home.vue
+#main.js
+#components\common\scroll\Scroll.vue
+
+1,监听图片加载,绑定执行监听后执行的函数
+2,定义处理函数,发射事件
+3,home.vue接收/图片加载完成事件
+4,main.js创建vue实例
+5,Scroll.vue中定义refresh方法
+6,home.vue调用refresh
+
+
+
+===========================1,监听图片加载
+#components\content\goods\GoodsListItem.vue
+<template>
+  <div class="goods-item" @click="itemClick">
+//------------------------------------------//
+    <img :src="goodsItem.show.img" alt="" @load="imageLoad">
+//@load="imageLoad关键代码,定义imageload处理方法
+//------------------------------------------//
+    <div class="goods-info">
+      <p>{{goodsItem.title}}</p>
+      <span class="price">{{goodsItem.price}}</span>
+      <span class="collect">{{goodsItem.cfav}}</span>
+    </div>
+  </div>
+</template>
+
+
+===========================2,定义处理函数
+    methods: {
+      imageLoad() {
+        this.$bus.$emit('itemImageLoad')
+      },
+//
+
+=========================3,home.vue接收事件
+#views\home\Home.vue
+    mounted() {
+      // 1.图片加载完成的事件监听
+      const refresh = debounce(this.$refs.scroll.refresh, 50)
+      this.$bus.$on('itemImageLoad', () => {
+        refresh()
+      })
+    },
+
+
+=============================4,main.js创建vue实例
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+
+Vue.config.productionTip = false
+//--------key---------------//
+Vue.prototype.$bus = new Vue()
+//-----------------------//
+
+new Vue({
+  render: h => h(App),
+  router
+}).$mount('#app')
+
+#这是事件总线的知识点
+
+
+==============================5,Scroll.vue中定义refresh方法
+#components\common\scroll\Scroll.vue
+    methods: {
+      scrollTo(x, y, time=300) {
+        this.scroll && this.scroll.scrollTo(x, y, time)
+      },
+      refresh() {
+        this.scroll && this.scroll.refresh()
+      },
+
+
+================================6,home.vue调用refresh
+    },
+    mounted() {
+      // 1.图片加载完成的事件监听
+      const refresh = debounce(this.$refs.scroll.refresh, 50)
+      this.$bus.$on('itemImageLoad', () => {
+        refresh()
+      })
+    },
+

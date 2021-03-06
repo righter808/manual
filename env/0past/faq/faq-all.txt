@@ -1,0 +1,308 @@
+#JavaScript,css,html,数据库,网络,计算机基础知识
+1,声名a变量并赋值10
+var a=10;
+==================
+2,JavaScript 字符串运算,
+超级,英雄,2个单词怎么运算一个词超级英雄?
+var txt1 = "超级";
+var txt2 = "英雄";
+var txt3=txt1+txt2;
+==================
+3,下面的运行结果,txt1的值是什么?
+--------------
+txt1 = "Hello ";
+txt1 += "Kitty！";
+--------------
+结果为HelloKitty
+==================
+4,使用什么运算符来确定 JavaScript 变量的数据类型。
+typeof
+==================
+5,阅读下面代码
+---------------
+typeof name=lijun;
+typeof function(){};
+typeof adress;
+typeof num=[1,2,3,4];
+typeof null 
+typeof 3.14
+他们的的返回值是?
+---------------
+string  function object undefined object number
+==================
+6,用a,b,c,d分别保存数值、字符串值、数组、对象：
+var a= 7;                             // 数字
+var b = "Gates";                      // 字符串
+var c= ["Porsche", "Volvo", "BMW"];         // 数组
+var d = {firstName:"Bill", lastName:"Gates"};    // 对象 
+==================
+7,var x = 911 + "Porsche";x的值是什么?为什么?
+911Porsche
+911默认为字符串做了处理
+==================
+8,var x; x的数据类型是什么?
+undefined
+
+var car = "";   car的类型是?
+值是 ""，类型是 "string"
+
+var person = null; 类型是?
+对象,值为null
+==================
+9,下面哪个是属性,哪个是属性值?
+var person = {firstName:"Bill", lastName:"Gates", age:62, eyeColor:"blue"};
+firstName属性,Bill 属性值
+==================
+10,下面A和B中,哪个是函数,哪个是对象方法?
+A:
+var x = myFunction(7, 8);     
+function myFunction(a, b) {
+    return a * b;              
+}
+
+B:
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+
+=B是对象方法,A是函数
+==================
+11,下面的this分别指的什么?
+fullName : function() {
+  return this.firstName + " " + this.lastName;
+}
+=拥有这个方法的对象
+
+--------------------
+var x = this;
+=在单独使用时，拥有者是全局对象，因此 this 指的是全局对象。在浏览器窗口中，全局对象是 [object Window]：
+
+-------------------
+"use strict";
+var x = this;
+=在严格模式中，如果单独使用，那么 this 指的是全局对象 [object Window]：
+
+-------------------
+function myFunction() {
+  return this;
+}
+=在 JavaScript 函数中，函数的拥有者默认绑定 this。因此，在函数中，this 指的是全局对象 [object Window]。
+
+-----------------
+<button onclick="this.style.display='none'">
+  点击来删除我！
+</button>
+=在 HTML 事件处理程序中，this 指的是接收此事件的 HTML 元素：
+-----------------
+var person = {
+  firstName  : "Bill",
+  lastName   : "Gates",
+  id         : 678,
+  myFunction : function() {
+    return this;
+  }
+};
+=this指这个方法的拥有者对象,person
+==================
+12,下面函数的所属对象是?
+var x = myFunction(7, 8);     
+function myFunction(a, b) {
+    return a * b;              
+}
+=window object
+==================
+13,通过什么函数可以使用属于另一个对象的方法。
+=call()
+==================
+14,下面代码,person1要使用person的方法,怎么写?
+var person = {
+    fullName: function() {
+        return this.firstName + " " + this.lastName;
+    }
+}
+var person1 = {
+    firstName:"Bill",
+    lastName: "Gates",
+}
+var person2 = {
+    firstName:"Steve",
+    lastName: "Jobs",
+}
+
+答:
+person.fullName.call(person1);  
+==================
+15,call() 可接收参数,请用文字描述
+
+var person = {
+  fullName: function(city, country) {
+    return this.firstName + " " + this.lastName + "," + city + "," + country;
+  }
+}
+
+var person1 = {
+  firstName:"Bill",
+  lastName: "Gates"
+}
+
+var person2 = {
+  firstName:"Steve",
+  lastName: "Jobs"
+}
+
+var x = person.fullName.call(person1, "Seatle", "USA"); 
+document.getElementById("demo").innerHTML = x; 
+
+答:
+person1,调用person.fullname方法,同时给fullname传进去seatle.usa两个参数
+==================
+16,const,var,let区别
+答:const定义的变量不可以修改，而且必须初始化。
+var定义的变量可以修改，如果不初始化会输出undefined，不会报错。
+let是块级作用域，函数内部使用let定义后，对函数外部无影响。
+==================
+17,有3个div,长宽高相等,要让他们水平等分布局怎么弄?
+答:设置class,class属性flex=1;即可
+==================
+18,什么是request和response?
+答:他们是对象,对象里有path等属性和方法
+==================
+19,css中,计算高度的计算属性是什么?
+答:height:calc(100% - 93px);
+==================
+20,css中,如果要设置层叠顺序,用什么属性?
+答:z-index;
+==================
+21.css中,height: 100vh;表示什么意思?
+表示:100%视口单位
+==================
+22,服务端渲染和客户端渲染在seo上有什么区别?
+答:服务端渲染因为是已经渲染好的页面字符串,所以有利于爬虫seo,客户端渲染需要执行脚本,不利于seo
+==================
+23,2个div,foo,fbb,宽高都为80px,如果要使foo向右偏离40px,fbb向上偏离40px,且foo覆盖在fbb之上,该怎么定义?
+答:foo相对定位position=relactive,属性left=40;z-index=40;fbb相对定位,position=relactive,属性top=40;
+==================
+24,相对定位是相对什么定位?
+相对自己原来正常的位置
+==================
+25,float布局和flex布局有什么区别?
+flex布局：当不需要兼容IE浏览器又不需要兼容最新浏览器时可以使用flex布局,
+float：当需要兼容IE浏览器时使用float布局，当使用float布局时不需要考虑移动端，因为手机上没有人用IE浏览其
+==================
+26,display：block和inline有什么区别?
+block元素在文档流中从上往下排列，每一个都会另起一行
+inline元素会在文档流中默认从左往右排列，到了最后才会换行
+==================
+27,什么是html文档流?
+相当于一个doc文档,文字和图片都是按从上到下的顺序排列,这就是所谓的文档流.
+==================
+28,如何让元素脱离文档流?
+float：left / right float：none:默认值，元素默认在文档流中排列​
+float：left :元素会立即脱离文档流，向页面左侧浮动​
+float：right：元素会立即脱离文档流，向页面右侧浮动,直到遇到块状元素,父元素的边框或者其他浮动元素
+开启定位：position：absolute/fixed 元素开启绝对定位和固定定位之后才会脱离文档流
+相对定位无法脱离文档流
+==================
+29,a元素脱离文档流后,他下面的元素会怎么排列?
+下面的元素会向上移动
+==================
+30,元素相对定位relactive脱离了文档流吗?
+没有脱离文档流,只有absolute and fixed 脱离了文档流
+==================
+31,数据库返回的时间数据是类似2012-12-12的数据吗?如果不是是什么?
+不是,是以unix为是起点的秒时间戳,类似143435465464,然后从中提取年月日时,因为这个太常用,编程语言封装好都有对应的转化API
+==================
+32,get,post请求的区别?
+GET - 从指定的资源请求数据。,查询字符串（名称/值对）是在 GET 请求的 URL 中发送的：
+POST - 向指定的资源提交要被处理的数据,查询字符串（名称/值对）是在 POST 请求的 HTTP 消息主体中发送的：
+==================
+33,post,get哪种请求会重新提交表单?
+post,表单重复提交
+==================
+34,文件中读取的数据一定且只能是什么类型?如果需要使用怎么办?
+字符串,用专门的函数进项转换成int 或者对象类型
+==================
+35,请在node中定义函数abc,无入参,无返回值.
+function abc(){}
+==================
+36,向服务器发送表单,表单有name,age,但还需要传递,id,sex等属性,这些属性不能显示在表单上,怎么做?
+设置input type=hidden,然后设置value的值即可
+==================
+37,mysql如果出现 authentication protocol 权限协议之类的错误,一般是出了什么问题?怎么解决?
+答:是权限问题,譬如远程访问权限,把mysql用户提升权限,具体参考网络
+==================
+38,如果有3个函数,a,b,c,其中,a的执行,依赖b函数的结果,b的执行依赖c函数的结果,那么怎么处理这种嵌套关系?
+用promise
+==================
+39,3个promise对象,promise A,promise B,promise C,怎么样处理A->B->C?
+promise A(返回promis B).then(返回promise C).then().
+==================
+40,linux有2个用户,一个root,1个pomelo,pomelo具有管理员权限,下载了一个文件,那么另外一个root用户能看到吗?
+不能
+pomelo具有管理员权限,他想给/根目录创建删除文件,依然需要sudo吗?
+需要
+==================
+41,virtualbox虚拟机中创建了文件A,然后关机,创建备份,然后删除备份,在打开当前状态,那么该文件A还存在吗?
+存在
+==================
+42,进入vim,不想保存文件并退出,输入什么?
+q!
+==================
+43.<p>大神大神分多少放电饭锅发个电饭锅电饭锅</p>这段文本太长,如果前端展示要隐藏一部分,并且显示省略号怎么办?
+指定样式
+overflow:hidde  text-overflow:ellipsis;  最好在加上这个white-space: nowrap ,
+==================
+44,一段div文本,不允许他换行怎么办?
+white-space: nowrap ,
+==================
+45,什么是伪类,伪元素?伪类和微元素的区别
+伪类:给元素添加特殊效果,譬如hover,link等
+伪元素:一个p元素,就是一个dom树中的元素,如果我要选择p元素中里面的内容,比如第一个字母,就需要用到伪元素,他不是dom树中的元素,就需要用到伪元素
+==================
+46,我要选择第一个p元素,用伪类怎么选择?
+<p>This is some text.</p>
+<p>This is some text.</p>
+答:用p:first-child{} 伪类
+==================
+47,匹配所有<p> 元素中的第一个 <i> 元素,怎么弄?
+<p>I am a <i>strong</i> man. I am a <i>strong</i> man.</p>
+<p>I am a <i>strong</i> man. I am a <i>strong</i> man.</p>
+答:p > i:first-child{color:blue;} 
+==================
+48,匹配所有作为第一个子元素的 <p> 元素中的所有 <i> 元素,让第一段p中的i元素,变成蓝色
+<p>I am a <i>strong</i> man. I am a <i>strong</i> man.</p>
+<p>I am a <i>strong</i> man. I am a <i>strong</i> man.</p>
+答:
+p:first-child i
+{
+	color:blue;
+} 
+==================
+49,css3中,伪类和伪元素分别用几个冒号表示:
+伪类:1个冒号
+伪元素:2个冒号
+==================
+50,下面这个css代表什么?
+p.article:first-letter
+  {
+  color: #FF0000;
+  }
+答:p的article类,的伪元素first-letter
+==================
+51,常用的伪元素有哪4个?
+:first-letter,:first-line,:before,:after
+==================
+52,css有哪4种组合选择符?
+后代选择器(以空格     分隔)
+子元素选择器(以大于 > 号分隔）
+相邻兄弟选择器（以加号 + 分隔）
+普通兄弟选择器（以波浪号 ～ 分隔）
+==================
+53,后代选择器和子元素选择器的区别?
+与后代选择器相比，子元素选择器（Child selectors）只能选择作为某元素子元素的元素。
+==================54
+54,如果要计算p元素生成了多少个,用纯css怎么解决?
+用css的计数器
+
+
+

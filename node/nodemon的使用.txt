@@ -1,0 +1,15 @@
+1,安装
+2,使用
+
+
+===================================1,安装
+#任意目录
+cnpm install --global nodemon
+
+===================================2,使用
+nodemon --version  查看版本
+
+原来打开服务器是,
+项目dos    node app.js
+安装nodemon后是
+项目dos    nodemon app.js

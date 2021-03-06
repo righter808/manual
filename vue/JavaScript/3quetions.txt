@@ -1,0 +1,52 @@
+1,声名a变量并赋值10
+var a=10;
+
+
+2,JavaScript 字符串运算,
+超级,英雄,2个单词怎么运算一个词超级英雄?
+var txt1 = "Bill";
+var txt2 = "Gates";
+var txt3=txt1+txt2;
+
+
+3,下面的运行结果,txt1的值是什么?
+--------------
+txt1 = "Hello ";
+txt1 += "Kitty！";
+--------------
+结果为HelloKitty
+
+
+4,使用什么运算符来确定 JavaScript 变量的数据类型。
+typeof
+
+5,阅读下面代码
+---------------
+typeof name=lijun;
+typeof function(){};
+typeof adress;
+typeof num=[1,2,3,4];
+typeof null 
+typeof 3.14
+他们的的返回值是?
+---------------
+string  function object undefined object number
+
+6,用a,b,c,d分别保存数值、字符串值、数组、对象：
+var length = 7;                             // 数字
+var lastName = "Gates";                      // 字符串
+var cars = ["Porsche", "Volvo", "BMW"];         // 数组
+var x = {firstName:"Bill", lastName:"Gates"};    // 对象 
+
+7,var x = 911 + "Porsche";x的值是什么?为什么?
+911Porsche
+911默认为字符串做了处理
+
+8,var x; x的数据类型是什么?
+undefined
+
+9,var car = "";   car的类型是?
+值是 ""，类型是 "string"
+
+10,var person = null; 类型是?
+对象,值为null

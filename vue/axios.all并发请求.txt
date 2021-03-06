@@ -1,0 +1,21 @@
+#2个请求同时完成后进行处理
+#可以使用axios的全局配置优化代码,具体查看----------axios全局配置.txt
+#直接在组件里面使用即可
+
+
+axios.all(
+[axios(
+{
+  url:'http://123.207.32.32:8000/home/multidata',   
+  method:'get',     
+  params:{type:'pop',page:1}     
+}
+),    
+axios({
+  url:'http://123.207.32.32:8000/home/multidata',   
+  method:'get',     
+  params:{type:'pop',page:1}     
+})])  
+.then(results =>{
+console.log( results );
+})

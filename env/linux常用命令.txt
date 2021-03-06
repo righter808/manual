@@ -1,0 +1,83 @@
+切换到root
+su root 
+
+ls -al /usr/bin
+查看/usr/bin下的软连
+ls -al /usr/bin | grep python
+查看软链指向,指定python
+
+ls -lh
+查看文件大小
+
+查看当前目录路径
+pwd
+
+移动文件
+mv 文件路径 目标路径
+
+删除文件
+rm 文件名
+
+删除文件夹
+rm -rf 文件夹
+
+复制文件
+cp [选项] 源文件 目标文件
+
+------------------------
+centOS8
+1.查看目前默认的启动默认
+systemctl get-default
+命令行模式   :multi-user.target
+图形界面模式:graphical.target
+2.设置为图形界面模式
+systemctl set-default graphical.target
+3.设置为命令行模式
+systemctl set-default multi-user.target
+------------------------
+
+
+systemctl list-unit-files
+左边是服务名称，右边是状态，enabled是开机启动，disabled是开机不启动。
+
+systemctl list-unit-files | grep enable
+只查看开机启动服务
+
+systemctl enable 服务名
+设置某服务自启动
+
+systemctl restart 服务名
+重启某服务
+
+systemctl start 漂服务名
+启动某服务
+
+systemctl stop 服务名
+结束某服务
+
+查看防火墙状态
+firewall-cmd --state
+
+停止firewall
+systemctl stop firewalld.service
+
+禁止firewall开机启动
+systemctl disable firewalld.service 
+
+
+https://www.runoob.com/linux/linux-yum.html
+1. 列出所有可更新的软件清单命令：yum check-update
+
+2. 更新所有软件命令：yum update
+
+3. 仅安装指定的软件命令：yum install <package_name>
+
+4. 仅更新指定的软件命令：yum update <package_name>
+
+5. 列出所有可安裝的软件清单命令：yum list
+
+6. 删除软件包命令：yum remove <package_name>
+
+7. 查找软件包命令：yum search <keyword>
+
+查找是否已安装某个软件包：yum search package

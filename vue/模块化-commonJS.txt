@@ -1,0 +1,12 @@
+commonJS标准
+--------导入---------
+所属文件comb.js
+var {flag,sum} =require('./a.js')
+说明：b.js导入a.js的falg，sum
+----导出模块数据----
+所属文件coma.js
+module.exports={
+  flag:flag,
+  sun:sum
+}
+说明：这种写法依赖node环境，node底层解析了这种结构

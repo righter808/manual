@@ -1,0 +1,45 @@
+<template>
+  <div></div>
+</template>
+
+<script>
+export default {
+  name: 'tabbar',
+  data() {
+      return {
+        resu: ''
+      }
+    },
+  methods:{
+      test:function (){alert("测试一下");}
+
+  }	
+  beforecreate(){},
+  created(){},
+  mounted(){},
+  compute(),
+  activated(),
+  deactivated(),
+  destroyed(),
+  watch(),
+  updated()
+}
+</script>
+
+<style scoped>
+</style>
+
+
+#name:tabbar,名字根据文件名修改
+#<template>填写div模板,注意,只能有1个根div,不能同时有2个根div,根div里可以嵌套div
+#<script>,写脚本文件
+#<style>写组件样式
+
+created:在创建vue对象时，当html渲染之前触发；但是注意，全局vue.js不强制刷新或者重启时只创建一次，
+也就是说，created()只会触发一次；
+mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。
+activated(),在使用keep-alive标签中有效，在vue对象存活的情况下，进入当前存在activated()函数的页面时，
+            一进入页面就触发；可用于初始化页面数据等
+deactivated：离开组件时执行；
+#activated()和deactivated()只有在<keep-alive></keep-alive>包裹的时候才有效
+updated()

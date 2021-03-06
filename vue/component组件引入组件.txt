@@ -1,0 +1,28 @@
+1,定义组件
+2,导入组件
+3,注册组件
+4,使用组件
+
+===============================1,定义组件
+此步省略
+
+===============================2,导入组件
+import Tabbar from '@/components/tabbar/tabbar'    
+#@  代表vuecli配置定义好的路径 如:@=src
+
+===============================3,注册组件
+export default {
+  name: 'App',
+  components:{tabbar}
+}
+#tabbar就是祖册的组件
+===============================4,使用组件
+<template>
+  <div id="app">
+  <div id="tabbar"></div>
+</div>
+</template>
+#直接使用<div id="tabbar"></div>
+
+
+

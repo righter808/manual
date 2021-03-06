@@ -1,0 +1,4 @@
+在启动类上加上下面的注解即可
+
+@MapperScan({"com.xttblog.mapper","com.xttblog.dao"})
+

@@ -1,0 +1,58 @@
+https://docs.cocos.com/creator/api/zh/classes/Sprite.html
+
+
+spriteFrame SpriteFrame 精灵的精灵帧
+type Sprite.Type 精灵渲染类型
+fillType Sprite.FillType 精灵填充类型，仅渲染类型设置为 cc.Sprite.Type.FILLED 时有效。
+fillCenter Vec2 填充中心点，仅渲染类型设置为 cc.Sprite.Type.FILLED 时有效。
+fillStart Number 填充起始点，仅渲染类型设置为 cc.Sprite.Type.FILLED 时有效。
+fillRange Number 填充范围，仅渲染类型设置为 cc.Sprite.Type.FILLED 时有效。
+trim Boolean 是否使用裁剪模式
+sizeMode Sprite.SizeMode 精灵尺寸调整模式
+sharedMaterials [Material] 渲染组件使用的材质。
+srcBlendFactor macro.BlendFactor 指定原图的混合模式，这会克隆一个新的材质对象，注意这带来的开销
+dstBlendFactor macro.BlendFactor 指定目标的混合模式
+__eventTargets Array 注册所有相关的 EventTargets，所有事件回调将在 _onPreDestroy 中删除。
+node Node 该组件被附加到的节点。
+uuid String 组件的 uuid，用于编辑器。
+_enabled Boolean
+enabled Boolean 表示该组件自身是否启用。
+enabledInHierarchy Boolean 表示该组件是否被启用并且所在的节点也处于激活状态。
+_isOnLoadCalled Number 返回一个值用来判断 onLoad 是否被调用过，不等于 0 时调用过，等于 0 时未调用。
+_name String
+_objFlags Number
+name String 该对象的名称。
+isValid Boolean 表示该对象是否可用（被 destroy 后将不可用）。
+方法
+setState Change the state of sprite.
+getState Gets the current state.
+getMaterial 根据指定索引获取材质
+getMaterials 获取所有材质。
+setMaterial 根据指定索引设置材质
+update 如果该组件启用，则每帧调用 update。
+lateUpdate 如果该组件启用，则每帧调用 LateUpdate。
+__preload __preload is called before every onLoad....
+onLoad 当附加到一个激活的节点上或者其节点第一次激活时候调用。
+start 如果该组件第一次启用，则在所有组件的 update 之前调用。
+onEnable 当该组件被启用，并且它的节点也激活时。
+onDisable 当该组件被禁用或节点变为无效时调用。
+onDestroy 该方法为生命周期方法，父类未必会有实现。
+onFocusInEditor
+onLostFocusInEditor
+resetInEditor 用来初始化组件或节点的一些属性，当该组件被第一次添加到节点上或用户点击了它的 Reset 菜单时调用。
+addComponent 向节点添加一个组件类，你还可以通过传入脚本的名称来添加组件。
+getComponent 获取节点上指定类型的组件，如果节点有附加指定类型的组件，则返回，如果没有则为空。
+getComponents 返回节点上指定类型的所有组件。
+getComponentInChildren 递归查找所有子节点中第一个匹配指定类型的组件。
+getComponentsInChildren 递归查找自身或所有子节点中指定类型的组件
+_getLocalBounds 以便编辑器的场景视图可以正确地执行点选测试。
+onRestore onRestore 是用户在检查器菜单点击 Reset 时，对此组件执行撤消操作后调用的。
+schedule 调度一个自定义的回调函数。
+scheduleOnce 调度一个只运行一次的回调函数，可以指定 0 让回调函数在下一帧立即执行或者在一定的延时之后执行。
+unschedule 取消调度一个自定义的回调函数。
+unscheduleAllCallbacks 取消调度所有已调度的回调函数：定制的回调函数以及 update 回调函数。
+destroy 销毁该对象，并释放所有它对其它对象的引用。
+_destruct 清除实例中的所有引用。
+_onPreDestroy 在对象被销毁之前调用。
+_serialize 为此对象定制序列化。
+_deserialize 从自定义序列化数据初始化此对象。

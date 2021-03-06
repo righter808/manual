@@ -1,0 +1,9 @@
+
+https://docs.cocos.com/creator/manual/zh/
+#官网
+
+
+https://docs.cocos.com/creator/api/zh/modules/cc.html
+#API
+
+

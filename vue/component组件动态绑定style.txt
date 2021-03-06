@@ -1,0 +1,32 @@
+1,父组件定义一个参数
+2,子组件设置props接收参数,最好设置默认值
+3,子组件设置计算属性,设置样式
+4,子组件绑定样式
+
+
+=========1,父组件定义一个参数,
+关键代码:activecolor="blue",设置参数,activecolor
+   <tabbar>
+                <tabbaritem link="/home" activecolor="blue">
+                <div slot="itemdiv">首页</div>
+
+=========2,子组件设置props接收参数,最好设置默认值
+关键代码:activecolor:{type: String,default:'red'
+   props: {
+                  link: {type: String,required: true},
+                  activecolor:{type: String,default:'red'}
+              },
+
+=========3,子组件设置计算属性,设置样式
+    computed:{
+         isactive() { return this.$route.path.indexOf(this.link) !== -1},   //判断路由是否处于活跃状态
+         activestyle(){return this.isactive ? {color:this.activecolor} : {}}    //如果路由处于活跃状态,就把父组件传来的                                                                                                      //activecolor添加到activestyle中
+          }, 
+
+=========4,子组件绑定样式
+关键代码: :style="activestyle"   绑定样式
+  <slot v-else  name="itemimgactive"></slot>
+    <div  :style="activestyle"><slot  name="itemdiv"></slot></div>
+	  
+  </div>
+    

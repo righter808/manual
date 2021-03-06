@@ -1,0 +1,22 @@
+软件名 下载路径 安装地址 其他 备注
+mysql 
+source:D:\source
+install:C:\Program Files\MySQL\MySQL Server 8.0
+data:C:\ProgramData\MySQL\MySQL Server 8.0
+port:
+
+
+********************windows10********************
+virtualbox 
+data:E:\VirtualComputer
+
+virtualbox@centosenc 
+source: D:\systemSrc
+install:E:\VirtualComputer\centOS\centosenv  
+
+
+mysql 
+source:D:\source
+install:C:\Program Files\MySQL\MySQL Server 8.0
+data:C:\ProgramData\MySQL\MySQL Server 8.0
+port:3307

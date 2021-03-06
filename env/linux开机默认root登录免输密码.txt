@@ -1,0 +1,10 @@
+https://www.cnblogs.com/liutongqing/p/13545971.html
+
+使用root账户进入系统：
+
+vi /etc/gdm/custom.conf
+在[daemon]下写入：
+
+AutomaticLoginEnable=True
+AutomaticLogin=root
+重启系统之后可以直接进入root账户。不用输入密码
