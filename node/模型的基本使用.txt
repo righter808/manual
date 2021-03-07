@@ -2,6 +2,8 @@
 2,导出方法
 3,控制器导入,并调用模型
 
+#注意yy是定义好的模型,要使用别的模型,调用模型的方法,根据需要修改即可
+
 附:
 crud基本格式
 分页查询
@@ -63,6 +65,22 @@ const findhaha=()=>{
 			console.log('保存成功')
 			console.log(ret)
 		  }})}		  
+
+
+#删除
+const deleteyy=(a)=>{
+//a参数是控制器调用这个方法,传入的参数
+   return yy.remove({"username":a}, function (err, ret) {
+   //第二排的a,是控制器传入的参数,代表眼删除的username=a变量,a如果传进来时=zhaoyun,则删除数据库中username=zhaoyun的字段
+  if (err) {
+    console.log('删除失败')
+  } else {
+    console.log('删除成功')
+    console.log(ret)
+  }
+})
+}	
+
 
 #分页查询		  
 const findhaha=(skipnum,limitnum)=>{

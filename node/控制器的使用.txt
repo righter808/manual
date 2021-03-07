@@ -5,6 +5,9 @@
 3,导出控制器方法给路由
 4,路由导入控制器,并调用控制器方法
 
+#导入m层的model
+const model=require("../db.js"),如控制器可调用model里定义数据库操作的方法
+
 附加:
 crud
 分页查询
@@ -37,6 +40,7 @@ module.exports={
 const dbcontroller= require("./controller/aacon.js")
 
 =========================附加
+#查
 #接收post请求,根据post请求创建模型并保存
 const create =(req,res)=>{
     //1,接收数据
@@ -67,4 +71,14 @@ const haha =async (req,res)=>{
 	//3,获取数据	
 	let hahares=await model.findhaha(skip,parseInt(getdate.pagesize))
 	res.send(hahares)
+}
+
+#删
+const deleteyy =async (req,res)=>{
+	let a=req.query.username
+	//req.query返回的是参数,如username="zhaoyun",需要将里面的参数取出来传递给db层,所以,req.query.username="zhaoyun"
+    let hahares=await model.deleteyy(a)
+	//这里的hahares指的是db层方法的返回结果保存到了hahares中,然后把hahares查询结果,返回给页面.
+    res.send(hahares)
+	//查询结果返回给页面
 }
